@@ -2,9 +2,14 @@ import express from "express";
 import nunjucks from "nunjucks";
 import bodyParser from "body-parser";
 import session from "express-session";
+import dotenv from 'dotenv';
+
 
 import { getAllDatabases } from "./controllers/TestController";
+import { getLoginForm, getRegistrationForm, postLoginForm, postRegistrationForm } from "./controllers/AuthController";
 
+
+dotenv.config();
 const app = express();
 
 nunjucks.configure('views', {
@@ -17,7 +22,9 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 
-app.use(session({ secret: 'SUPER_SECRET', cookie: { maxAge: 28800000 }}));
+app.use(session({ secret: process.env.SESSION_SECRET,
+                  cookie: {maxAge: parseInt(process.env.SESSION_EXPIRY)}
+}));
 
 declare module "express-session" {
   interface SessionData {
@@ -30,3 +37,7 @@ app.listen(3000, () => {
 });
 
 app.get('/', getAllDatabases);
+app.get('/login',getLoginForm)
+app.post('/login', postLoginForm)
+app.get('/register', getRegistrationForm)
+app.post('/register', postRegistrationForm)
