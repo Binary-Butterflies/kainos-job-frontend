@@ -16,6 +16,7 @@ describe('AuthController', function () {
     sinon.restore();
   });
   describe('LoginForm', function () {
+    
     it("should render login form", async () => {
       const res = { render: sinon.spy() };
       const req = {};
@@ -26,9 +27,7 @@ describe('AuthController', function () {
     it('should render login form with error message when error thrown', async () => {
       sinon.restore();
       const errorMessage: string = 'Error message';
-      console.log(Object.getOwnPropertyDescriptor(Object.prototype, 'getToken'));
       sinon.stub(AuthServices, 'getToken').rejects(new Error(errorMessage));
-      console.log(Object.getOwnPropertyDescriptor(Object.prototype, 'getToken'));
       const req = { };
       const res = { render: sinon.spy(), locals: { errormessage: '' } };
 
@@ -40,13 +39,26 @@ describe('AuthController', function () {
   });
   
   describe('RegisterForm', function () {
+    
     it("should render Registration form", async () => {
       const res = { render: sinon.spy() };
       const req = {};
       await AuthController.getRegistrationForm(req as Request, res as unknown as Response);
       expect(res.render.calledOnce).to.be.true;
     });
+    
+    it('should render register form with error message when error thrown', async () => {
+      sinon.restore();
+      const errorMessage: string = 'Error message';
+      sinon.stub(AuthServices, 'createUser').rejects(new Error(errorMessage));
+      const req = { };
+      const res = { render: sinon.spy(), locals: { errormessage: '' } };
 
+      await AuthController.postRegistrationForm(req as Request, res as unknown as Response);
+
+      expect(res.render.calledOnce).to.be.true;
+      expect(res.locals.errormessage).to.equal(errorMessage);
+    });
   });
 })
 

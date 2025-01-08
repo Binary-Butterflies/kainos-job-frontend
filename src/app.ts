@@ -31,6 +31,10 @@ declare module "express-session" {
     token: string;
   }
 }
+app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.log(`${req.method}-ing endpoint "${req.path}"`);
+  next();
+})
 
 app.listen(3000, () => {
     console.log('Server started on port 3000');
