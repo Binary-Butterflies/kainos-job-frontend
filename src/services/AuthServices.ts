@@ -3,7 +3,6 @@ import { LoginRequest } from "../models/LoginRequest";
 import { RegisterRequest } from "../models/RegisterRequest";
 
 export const getToken = async function(loginRequest:LoginRequest): Promise<string> {
-    console.log(Object.getOwnPropertyDescriptor(Object.prototype, 'getToken'));
     try {
         console.log("Get Token")
         const response:AxiosResponse = await axios.post("http://localhost:8080/api/auth/login" ,loginRequest);
