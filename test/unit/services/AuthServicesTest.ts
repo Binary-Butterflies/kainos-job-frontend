@@ -16,10 +16,7 @@ const loginRequest: LoginRequest = {
   email: "Terry@gmail.com",
   password: "Terry",
 };
-const badLoginRequest: LoginRequest = {
-  email: "T@gmail.com",
-  password: "Terry",
-};
+ 
 const badRegisterRequest: RegisterRequest = {
   email: "Terrymail.com",
   password: "Terry"
