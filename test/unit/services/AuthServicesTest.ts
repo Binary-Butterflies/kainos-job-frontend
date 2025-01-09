@@ -50,7 +50,7 @@ describe("AuthService", function () {
   describe("register", function () {
     it("should throw exception when 500 returned by axios", async () => {
       mock.onPost(URL+"register", badRegisterRequest).reply(500);
-      await createUser(badLoginRequest).catch((e) => {
+      await createUser(badRegisterRequest).catch((e) => {
         expect(e.message).to.equal("Failed to create employee");
       });
     });
