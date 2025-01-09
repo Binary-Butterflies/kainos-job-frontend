@@ -11,7 +11,8 @@ import {
   postLoginForm,
   postRegistrationForm,
 } from "./controllers/AuthController";
-
+import { getLogger } from "./LogConfig";
+const appLogger = getLogger("app")
 dotenv.config();
 const app = express();
 
@@ -42,13 +43,13 @@ declare module "express-session" {
 
 app.use(
   (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    console.log(`${req.method}-ing endpoint "${req.path}"`);
+    appLogger.info(`${req.method}-ing endpoint "${req.path}"`);
     next();
   }
 );
 
 app.listen(3000, () => {
-  console.log("Server started on port 3000");
+  appLogger.info("Server started on port 3000");
 });
 
 app.get("/", getAllDatabases);
