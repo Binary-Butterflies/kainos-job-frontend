@@ -1,14 +1,17 @@
-import { getIndex, getJobRoles, getJobRole, getJobRoleForm } from "./controllers/JobRoleController";
+import { getIndex, getJobRoles } from "./controllers/JobRoleController";
 import express from "express";
 import nunjucks from "nunjucks";
 import bodyParser from "body-parser";
 import { dateFilter } from "./filter/DateFilter";
+import {getLogger} from "../src/LogConfig";
+
+const logApp = getLogger("service");
 
 const app = express();
 
 nunjucks.configure('views', {
-    autoescape: true,
-    express: app
+  autoescape: true,
+  express: app
 });
 
 const env = nunjucks.configure('views', {
@@ -27,16 +30,14 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.log(`${req.method}-ing endpoint "${req.path}"`);
+  logApp.info(`${req.method}-ing endpoint "${req.path}"`);
   next();
 })
 
 app.listen(3000, () => {
-  console.log('Server started on port 3000');
+  logApp.info('Server started on port 3000');
 });
 
 app.get('/', getIndex);
 app.get('/jobRoles', getJobRoles);
-app.get('/jobRoles/:id', getJobRole);
-app.get('/insert-jobRole', getJobRoleForm);
 

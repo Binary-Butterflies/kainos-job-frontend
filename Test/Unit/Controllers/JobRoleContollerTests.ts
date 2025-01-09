@@ -9,7 +9,7 @@ const jobRoleResponse: JobRoleResponse = {
   jobRoleId: 123,
   roleName: "Software Engineer",
   location: "Bristol",
-  closingDate: new Date("2025-12-31"),
+  closingDate: new Date("31-12-2025"),
   band: {
     bandId: 1,
     bandName: "Senior"
@@ -41,42 +41,13 @@ describe("JobRoleController", function () {
 
     it("should render view with error message when error is thrown", async () => {
       const errorMessage = "Error message";
-      
+
       sinon.stub(JobRoleService, "getAllJobRoles").rejects(new Error(errorMessage));
 
       const req = {};
-      const res = { render: sinon.spy(), locals: { errormessage: errorMessage} };
+      const res = { render: sinon.spy(), locals: { errormessage: errorMessage } };
 
       await JobRoleController.getJobRoles(req as Request, res as unknown as Response);
-
-      expect(res.render.calledOnce).to.be.true;
-      expect(res.locals.errormessage).to.equal(errorMessage);
-    });
-  });
-
-  describe("getJobRole", function () {
-    it("should render view with job role when job role is returned", async () => {
-      const jobRoleId = 123;
-
-      sinon.stub(JobRoleService, "getSingleJobRole").resolves(jobRoleResponse);
-
-      const req = { params: { id: jobRoleId } };
-      const res = { render: sinon.spy() };
-
-      await JobRoleController.getJobRole(req as unknown as Request, res as unknown as Response);
-      expect(res.render.calledOnce).to.be.true;
-    });
-
-    it("should render error view with error message when error is thrown", async () => {
-      const jobRoleId = 123;
-      const errorMessage = "Error retrieving job role";
-
-      sinon.stub(JobRoleService, "getSingleJobRole").rejects(new Error(errorMessage));
-
-      const req = { params: { id: jobRoleId } };
-      const res = { render: sinon.spy(), locals: { errormessage: "" } };
-
-      await JobRoleController.getJobRole(req as unknown as Request, res as unknown as Response);
 
       expect(res.render.calledOnce).to.be.true;
       expect(res.locals.errormessage).to.equal(errorMessage);
@@ -89,17 +60,6 @@ describe("JobRoleController", function () {
       const res = { render: sinon.spy() };
 
       await JobRoleController.getIndex(req as Request, res as unknown as Response);
-
-      expect(res.render.calledOnce).to.be.true;
-    });
-  });
-
-  describe("getJobRoleForm", function () {
-    it("should render job role form view", async () => {
-      const req = {};
-      const res = { render: sinon.spy() };
-
-      await JobRoleController.getJobRoleForm(req as Request, res as unknown as Response);
 
       expect(res.render.calledOnce).to.be.true;
     });

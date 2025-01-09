@@ -16,9 +16,9 @@ export const validateJobRoleRequest = function (jobRoleRequest: JobRoleRequest):
 
   if (!jobRoleRequest.roleName || jobRoleRequest.roleName.trim() === "") {
     throw new Error("roleName must not be empty");
-}
+  }
 
-if (!jobRoleRequest.location) {
+  if (!jobRoleRequest.location) {
     throw new Error("location must not be undefined");
-}
+  }
 };

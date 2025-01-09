@@ -2,6 +2,7 @@ import { describe, it } from 'node:test';
 import { validateJobRoleRequest } from '../../../src/Validators/JobRoleValidator';
 import { JobRoleRequest } from '../../../src/models/JobRoleRequest';
 import assert from 'assert';
+
 describe('JobRoleValidator', function () {
   describe('validateJobRoleRequest', function () {
 
@@ -9,22 +10,18 @@ describe('JobRoleValidator', function () {
       const jobRoleRequest: JobRoleRequest = {
         roleName: "Software Engineer",
         location: "Bristol",
-        closingDate: new Date('2025-12-31'),
+        closingDate: new Date('31-12-2025'),
         bandId: 1
       };
 
-      try {
-        validateJobRoleRequest(jobRoleRequest);
-      } catch (e) {
-        assert.fail("Expected no error for valid JobRoleRequest");
-      }
+      validateJobRoleRequest(jobRoleRequest);
     });
 
     it('should throw an error if roleName is empty', () => {
       const jobRoleRequest: JobRoleRequest = {
         roleName: "",
         location: "Bristol",
-        closingDate: new Date('2025-12-31'),
+        closingDate: new Date('31-12-2025'),
         bandId: 1
       };
 
@@ -38,7 +35,7 @@ describe('JobRoleValidator', function () {
       const jobRoleRequest: JobRoleRequest = {
         roleName: "Software Engineer",
         location: "Bristol",
-        closingDate: new Date('2020-01-01'),
+        closingDate: new Date('01-01-2020'),
         bandId: 1
       };
 
@@ -51,8 +48,8 @@ describe('JobRoleValidator', function () {
     it('should throw an error if location is undefined', () => {
       const jobRoleRequest: JobRoleRequest = {
         roleName: "Software Engineer",
-        location: undefined, 
-        closingDate: new Date('2025-12-31'),
+        location: undefined,
+        closingDate: new Date('31-12-2025'),
         bandId: 1
       };
 
@@ -66,7 +63,7 @@ describe('JobRoleValidator', function () {
       const jobRoleRequest: JobRoleRequest = {
         roleName: "Software Engineer",
         location: "Bristol",
-        closingDate: new Date('2025-12-31'),
+        closingDate: new Date('31-12-2025'),
         bandId: -1
       };
 
