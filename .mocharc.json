@@ -1,1 +1,3 @@
-{    "node-option": ["require=ts-node/register"]}
+{
+    "node-option": ["require=ts-node/register"]
+}
