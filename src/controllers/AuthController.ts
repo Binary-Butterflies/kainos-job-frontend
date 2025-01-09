@@ -21,6 +21,7 @@ export const postLoginForm = async (
     res.redirect("/#");
   } catch (e) {
     controllerLogger.error("Failed to login");
+    res.locals.errormessage = "Failed to login"
     res.render("loginForm.html", req.body);
   }
 };
@@ -42,7 +43,8 @@ export const postRegistrationForm = async (
     await createUser(req.body);
     res.redirect("/login");
   } catch (e) {
-    controllerLogger.error("Failed to login");
+    controllerLogger.error("Failed to register");
+    res.locals.errormessage = "Failed to register"
     res.render("registrationForm.html", req.body);
   }
 };

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Job Roles at kainos</title>
+  <link rel="icon" type="image/x-icon" href="https://www.kainos.com/globalassets/images/5_logos/kainos_logo.png">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/stylesheets/kainos-styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/3.2.3/nunjucks.min.js"></script>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <img src="https://www.kainos.com/globalassets/images/5_logos/kainos_logo.png" alt="Kainos Logo"
+        style="height: 40px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Job Roles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <div class="text-center mb-4">
+      <img src="https://www.kainos.com/globalassets/images/5_logos/kainos_logo.png" alt="Kainos Logo"
+        style="max-width: 200px;">
+    </div>
+    <h1 class="text-center mb-4">Open Job Roles at Kainos</h1>
+
+    {% if errormessage %}
+    <div class="alert alert-danger">{{ errormessage }}</div>
+    {% endif %}
+
+
+    {% if jobRoles %}
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Role Name</th>
+          <th>Location</th>
+          <th>Capability</th>
+          <th>Band</th>
+          <th>Closing Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for role in jobRoles | sort %}
+        <tr>
+          <td><a href="/job-roles/{{ role.id }}">{{ role.roleName }}</a></td>
+          <td>{{ role.location }}</td>
+          <td>{{ role.capability.capabilityName }}</td>
+          <td>{{ role.band.bandName }}</td>
+          <td>{{ role.closingDate | date }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="text-center">No job roles available at the moment.</p>
+    {% endif %}
+
+
+  </div>
+
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+      <p>&copy; Kainos All rights reserved.</p>
+      <p>
+        <a href="#" class="text-white mr-3">Privacy Policy</a>
+        <a href="#" class="text-white">Terms of Use</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
