@@ -18,7 +18,7 @@ export const postLoginForm = async (
     req.session.token = await getToken(req.body);
     res.redirect("/#");
   } catch (e) {
-    res.locals.errormessage = e.message;
+    res.locals.errormessage = "Failed to login";
     res.render("loginForm.html", req.body);
   }
 };
@@ -40,7 +40,7 @@ export const postRegistrationForm = async (
     await createUser(req.body);
     res.redirect("/login");
   } catch (e) {
-    res.locals.errormessage = e.message;
+    res.locals.errormessage = "Failed to login";
     res.render("registrationForm.html", req.body);
   }
 };
