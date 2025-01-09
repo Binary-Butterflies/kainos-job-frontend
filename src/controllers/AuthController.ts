@@ -7,7 +7,7 @@ export const getLoginForm = async (
   req: express.Request,
   res: express.Response
 ): Promise<void> => {
-   controllerLogger.info("GET-ing login form");
+  controllerLogger.info("GET-ing login form");
   res.render("loginForm.html");
 };
 

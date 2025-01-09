@@ -12,7 +12,7 @@ import {
   postRegistrationForm,
 } from "./controllers/AuthController";
 import { getLogger } from "./LogConfig";
-const appLogger = getLogger("app")
+const appLogger = getLogger("app");
 dotenv.config();
 const app = express();
 

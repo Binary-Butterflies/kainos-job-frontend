@@ -30,7 +30,10 @@ describe("AuthController", function () {
       const errorMessage: string = "Error message";
       sinon.stub(AuthServices, "getToken").rejects(new Error(errorMessage));
       const req = {};
-      const res = { render: sinon.spy(), locals: { errormessage: "" } };
+      const res = {
+        render: sinon.spy(),
+        locals: { errormessage: "Error message" },
+      };
 
       await AuthController.postLoginForm(
         req as Request,
@@ -58,7 +61,10 @@ describe("AuthController", function () {
       const errorMessage: string = "Error message";
       sinon.stub(AuthServices, "createUser").rejects(new Error(errorMessage));
       const req = {};
-      const res = { render: sinon.spy(), locals: { errormessage: "" } };
+      const res = {
+        render: sinon.spy(),
+        locals: { errormessage: "Error message" },
+      };
 
       await AuthController.postRegistrationForm(
         req as Request,
