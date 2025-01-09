@@ -6,6 +6,7 @@ import { createUser, getToken } from "../../../src/services/AuthServices";
 import { expect } from "chai";
 import * as chai from "chai";
 import chaiAsPromised from "chai-as-promised";
+import { RegisterRequest } from "../../../src/models/RegisterRequest";
 
 chai.use(chaiAsPromised);
 
@@ -18,6 +19,10 @@ const loginRequest: LoginRequest = {
 const badLoginRequest: LoginRequest = {
   email: "T@gmail.com",
   password: "Terry",
+};
+const badRegisterRequest: RegisterRequest = {
+  email: "Terrymail.com",
+  password: "Terry"
 };
 
 const token = "MyMockToken";
@@ -35,7 +40,7 @@ describe("AuthService", function () {
     });
 
     it("should throw exception when 500 returned by axios", async () => {
-      mock.onPost(URL+"login", loginRequest).reply(500);
+      mock.onPost(URL+"login", ).reply(500);
 
       await getToken(loginRequest).catch((e) => {
         expect(e.message).to.equal("Failed to get employee");
@@ -44,7 +49,7 @@ describe("AuthService", function () {
   });
   describe("register", function () {
     it("should throw exception when 500 returned by axios", async () => {
-      mock.onPost(URL+"register", badLoginRequest).reply(500);
+      mock.onPost(URL+"register", badRegisterRequest).reply(500);
       await createUser(badLoginRequest).catch((e) => {
         expect(e.message).to.equal("Failed to create employee");
       });
