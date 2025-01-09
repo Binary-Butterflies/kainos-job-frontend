@@ -2,11 +2,10 @@ import { JobRoleRequest } from "../models/JobRoleRequest";
 
 export const validateJobRoleRequest = function (jobRoleRequest: JobRoleRequest): void {
   const currentDate = new Date();
-  currentDate.setHours(0, 0, 0, 0);
 
   const closingDate = new Date(jobRoleRequest.closingDate);
 
-  if (closingDate < currentDate) {
+  if (closingDate <= currentDate) {
     throw new Error("Closing date cannot be in the past");
   }
 
