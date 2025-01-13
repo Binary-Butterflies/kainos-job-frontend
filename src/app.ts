@@ -12,6 +12,8 @@ import {
   postLoginForm,
   postRegistrationForm,
 } from "./controllers/AuthController";
+import { allowRoles } from "./middleware/AuthMiddleware";
+import { UserRole } from "./models/UserRole";
 import * as path from "path";
 
 dotenv.config();
@@ -64,7 +66,7 @@ app.listen(3000, () => {
 app.use("/",express.static("node_modules/bootstrap/dist"));
 
 app.get("/", getIndex);
-app.get("/jobRoles", getJobRoles);
+app.get("/jobRoles", allowRoles([UserRole.Admin, UserRole.User]), getJobRoles);
 
 app.get("/login", getLoginForm);
 app.post("/login", postLoginForm);

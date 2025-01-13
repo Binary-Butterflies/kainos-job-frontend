@@ -3,7 +3,7 @@ import { LoginRequest } from "../models/LoginRequest";
 import { RegisterRequest } from "../models/RegisterRequest";
 import { getLogger } from "../LogConfig";
 
-const URL = "http://localhost:8080/api/auth/"
+const URL = "api/auth/"
 const logService = getLogger("service");
 
 export const getToken = async function (
