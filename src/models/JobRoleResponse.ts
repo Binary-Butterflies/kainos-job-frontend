@@ -1,5 +1,5 @@
 import { Band } from "./Band";
-import { Capability } from "./capability";
+import { Capability } from "./Capability";
 
 export type JobRoleResponse = {
     jobRoleId: number,
