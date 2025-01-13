@@ -10,7 +10,7 @@ This project uses NodeJs 20. It is recommended that you use the LTS release of N
 
 ### Install Dependencies
 
-To install the required dependencies, execute: 
+To install the required dependencies, please execute: 
 ```bash
 npm i
 ```
@@ -21,12 +21,12 @@ To run the application, please create a `.env` file in the root of the project b
 
 ### Running
 
-To run the application in live mode, please execute 
+To run the application in live mode, please execute:
 ```
 npm run dev
 ```
 
-To run the application in production mode, please execute
+To run the application in production mode, please execute:
 ```
 npm start
 ```
