@@ -12,6 +12,7 @@ import {
   postLoginForm,
   postRegistrationForm,
 } from "./controllers/AuthController";
+import * as path from "path";
 
 dotenv.config();
 const appLogger = getLogger("app");
@@ -35,6 +36,7 @@ const env = nunjucks.configure("views", {
 
 env.addFilter("date", dateFilter);
 
+app.use(express.static(path.join(__dirname + '/../resources')));
 app.use(express.static("public"));
 app.set("view engine", "html");
 
@@ -58,6 +60,8 @@ app.use(
 app.listen(3000, () => {
   appLogger.info("Server started on port 3000");
 });
+
+app.use("/",express.static("node_modules/bootstrap/dist"));
 
 app.get("/", getIndex);
 app.get("/jobRoles", getJobRoles);

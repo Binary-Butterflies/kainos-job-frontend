@@ -2,14 +2,14 @@ import express from "express";
 import { getAllJobRoles, } from "../services/JobRoleServices";
 
 export const getIndex = async (req: express.Request, res: express.Response): Promise<void> => {
-    res.render('jobrole-home');
+    res.render('index');
 };
 
 export const getJobRoles = async (req: express.Request, res: express.Response): Promise<void> => {
     try {
-        res.render('jobroles-list', { jobRoles: await getAllJobRoles() });
+        res.render('list-jobroles', { jobRoles: await getAllJobRoles() });
     } catch (e) {
         res.locals.errormessage = e.message;
-        res.render('jobroles-list');
+        res.render('list-jobroles');
     }
 };

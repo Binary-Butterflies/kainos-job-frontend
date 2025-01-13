@@ -1,60 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kainos Jobs</title>
+    <link rel="shortcut icon" href="/resources/images/favicon.webp" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <script src="/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/3.2.3/nunjucks.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
     <form class = "form" action = "/register" method = "post">
-    <nav class="navbar navbar-expand-xl navbar-light mb-5 d-flex  " style="background-color: #ffffff;">
-      <div class="container-lg d-flex">
-        <img src="https://www.kainos.com/globalassets/images/5_logos/kainos_logo.png" alt="Kainos Logo" style="height: 40px;">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarLight" aria-controls="navbarLight" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse show  justify-content-center " id="navbarLight">
-          <ul class="navbar-nav  text-center mb-2 mb-xl-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">placeholder</a>
+      <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <img src="https://www.kainos.com/globalassets/images/5_logos/kainos_logo.png" alt="Kainos Logo" class="bi me-2" width="120" role="img">
+          </a>
+
+          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li>
+              <a href="#" class="nav-link px-2 link-secondary">Home</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">placeholder</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">placeholder</a>
+            <li>
+              <a href="jobroles" class="nav-link px-2 link-dark">Job Roles</a>
             </li>
           </ul>
+
+          <div class="col-md-3 text-end">
+            <a href="login">
+              <button type="button" class="btn btn-outline-primary me-2">Login</button>
+            </a>
+            <a href="register">
+              <button type="button" class="btn btn-primary">Sign-up</button>
+            </a>
+          </div>
+        </header>
+      </div>
+
+      <div class="container-sm">
+
+        <h1 class="mb-3">Register</h1>
+        <div class="input-group">
+          <span class="input-group-text mb-5" id="input-group-left">Email:</span>
+          <input type="text" class="form-control mb-5" id="email" name="email" value="{{email}}" placeholder="email" aria-label="email" aria-describedby="input-group-left">
         </div>
+        <div class="input-group">
+          <span class="input-group-text mb-3" id="input-group-left">Password:</span>
+          <input type="password" class="form-control mb-3" id="password" name="password" value="{{password}}" placeholder="password" aria-label="password" aria-describedby="input-group-left">
+        </div>
+
+        {% if errormessage %}
+          <h3 class="mb-2 mt-2">{{errormessage}}</h3>
+        {% endif %}
+
+        <br></br>
+
+        <button id="submit" type="submit" class="btn btn-primary" style="background-color: #283583">Sign Up</button>
+
       </div>
-    </nav>
-    <div class="container-sm">
 
-      <h1 class="mb-3">Register</h1>
-      <div class="input-group">
-        <span class="input-group-text mb-5" id="input-group-left">Email:</span>
-        <input type="text" class="form-control mb-5" id="email" name="email" value="{{email}}" placeholder="email" aria-label="email" aria-describedby="input-group-left">
+    </form>
+
+      <footer
+          class="text-center text-lg-start text-white"
+          style="background-color: #252d4f"
+          >
+      <section
+             class="d-flex justify-content-between p-4"
+             style="background-color: #283583"
+             ></section>
+
+      <section class="">
+        <div class="container text-center text-md-start mt-5">
+          <div class="row mt-3">
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <h6 class="text-uppercase fw-bold">Kainos</h6>
+              <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px; background-color: #f0f0ed; height: 2px"
+/>
+              <p>
+              Our people lead from the front, solving the biggest challenges for the world’s biggest brands. Work on projects that make a real difference, build a better world through technology, and leave a lasting positive impact and change the way our customers work for the better.
+            </p>
+            </div>
+
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold">Useful links</h6>
+              <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px; background-color: #f0f0ed; height: 2px"
+/>
+              <p>
+                <a href="https://www.kainos.com/about-us" class="text-white">About Us</a>
+              </p>
+              <p>
+                <a href="https://careers.kainos.com/gb/en/life-at-kainos" class="text-white">Our Culture</a>
+              </p>
+              <p>
+                <a href="https://www.kainos.com/about-us/our-approach" class="text-white">Our approach</a>
+              </p>
+              <p>
+                <a href="https://www.kainos.com/about-us/diversity-and-inclusion" class="text-white">Diversity and Inclusion</a>
+              </p>
+            </div>
+
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <h6 class="text-uppercase fw-bold">Contact</h6>
+              <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px; background-color: #f0f0ed; height: 2px"
+/>
+              <p>
+                <i class="fas fa-home mr-3"></i> 4-6 Upper Cres, Belfast BT7 1NT</p>
+              <p>
+                <i class="fas fa-envelope mr-3"></i> careers@kainos.com</p>
+              <p>
+                <i class="fas fa-phone mr-3"></i> 028 9057 1100</p>
+              <p>
+                <i class="fas fa-print mr-3"></i> +44 28 9057 1100</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div
+         class="text-center p-3"
+         style="background-color:rgb(51, 59, 92)"
+         >
+      © 2025 Copyright:
+      <a class="text-white" href="https://kainos.com/"
+         >Kainos</a
+        >
       </div>
-      <div class="input-group">
-        <span class="input-group-text mb-3" id="input-group-left">Password:</span>
-        <input type="password" class="form-control mb-3" id="password" name="password" value="{{password}}" placeholder="password" aria-label="password" aria-describedby="input-group-left">
-      </div>
-
-      {% if errormessage %}
-        <h3 class="mb-2 mt-2">{{errormessage}}</h3>
-      {% endif %}
-
-      <br></br>
-
-      <button id="submit" type="submit" class="btn btn-primary" style="background-color: #283583">Sign Up</button>
-
-    </div>
-
-  </form>
-</body>
-<footer>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</footer>
+    </footer>
+    </body>
 </html>

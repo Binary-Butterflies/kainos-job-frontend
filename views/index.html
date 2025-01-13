@@ -1,21 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-   <head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kainos Jobs</title>
-    <link rel="shortcut icon" href="/resources/images/favicon.webp" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <link rel="shortcut icon" href="images/favicon.webp" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
     <script src="/js/bootstrap.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/3.2.3/nunjucks.min.js"></script>
   </head>
-
   <body>
     <div class="container">
       <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-          <img src="https://www.kainos.com/globalassets/images/5_logos/kainos_logo.png" alt="Kainos Logo" class="bi me-2" width="120" role="img">
+          <img src="images/kainos.png" alt="Kainos Logo" class="bi me-2" width="120" role="img">
         </a>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -38,43 +35,40 @@
       </header>
     </div>
 
-    <div class="container mt-5">
-      <h1 class="text-center mb-4">Open Job Roles at Kainos</h1>
-
-      {% if errormessage %}
-        <div class="alert alert-danger">{{ errormessage }}</div>
-      {% endif %}
-
-      {% if jobRoles %}
-        <table class="table table-striped">
-          <thead class="thead-dark">
-            <tr>
-              <th>Role Name</th>
-              <th>Location</th>
-              <th>Capability</th>
-              <th>Band</th>
-              <th>Closing Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for role in jobRoles | sort %}
-              <tr>
-                <td>
-                  <a href="/job-roles/{{ role.id }}">{{ role.roleName }}</a>
-                </td>
-                <td>{{ role.location }}</td>
-                <td>{{ role.capability.capabilityName }}</td>
-                <td>{{ role.band.bandName }}</td>
-                <td>{{ role.closingDate | date }}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      {% else %}
-        <p class="text-center">No job roles available at the moment.</p>
-      {% endif %}
-
+    <style>
+      .centered-div {
+        width: 60%;
+        margin: 0 auto;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="centered-div, text-center" mx-auto>
+        This div is centered and takes up 60% of the screen width.
+        Whats up guys its ya boy connor to the f dizzle here back for another minecraft video
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
+        ioasdijasdasiodoiasjdoisajdijasodjasodjaosdijsiaojsdoijasdijasodijasoidjasoijdoaijsdoijasdoijaoidjaoijsdoiasjdoijasdoijasdoijsaoidj
     </div>
+
+    <br>
 
     <footer
           class="text-center text-lg-start text-white"
@@ -148,10 +142,5 @@
         >
       </div>
     </footer>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
-
 </html>
