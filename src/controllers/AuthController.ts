@@ -8,7 +8,7 @@ export const getLoginForm = async (
   res: express.Response
 ): Promise<void> => {
   controllerLogger.info("GET-ing login form");
-  res.render("loginForm.html");
+  res.render("loginForm.njk");
 };
 
 export const postLoginForm = async (
@@ -22,7 +22,7 @@ export const postLoginForm = async (
   } catch (e) {
     controllerLogger.error("Failed to login");
     res.locals.errormessage = "Failed to login"
-    res.render("loginForm.html", req.body);
+    res.render("loginForm.njk", req.body);
   }
 };
 
@@ -31,7 +31,7 @@ export const getRegistrationForm = async (
   res: express.Response
 ): Promise<void> => {
   controllerLogger.info("GET-ing registration form");
-  res.render("registrationForm.html");
+  res.render("registrationForm.njk");
 };
 
 export const postRegistrationForm = async (
@@ -45,6 +45,6 @@ export const postRegistrationForm = async (
   } catch (e) {
     controllerLogger.error("Failed to register");
     res.locals.errormessage = "Failed to register"
-    res.render("registrationForm.html", req.body);
+    res.render("registrationForm.njk", req.body);
   }
 };
