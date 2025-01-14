@@ -52,7 +52,7 @@
     {% endif %}
 
 
-    {% if jobRole %}
+    {% if role %}
     <table class="table table-striped">
       <thead class="thead-dark">
         <tr>
@@ -70,15 +70,15 @@
       </thead>
       <tbody>
         <tr>
-            <td><a href="/jobrole/{{ role.id }}">{{ role.roleName }}</a></td>
+            <td>{{ role.roleName }}</td>
             <td>{{ role.location }}</td>
             <td>{{ role.capability.capabilityName }}</td>
             <td>{{ role.band.bandName }}</td>
-            <td>{{ role.jobRoleDetails.description }}</td>
-            <td>{{ role.jobRoleDetails.responsibilities }}</td>
-            <td>{{ role.jobRoleDetails.sharepointURL }}</td>
-            <td>{{ role.jobRoleDetails.numberOfOpenPositions }}</td>
-            <td>{{ role.jobRoleDetails.statusName }}</td>
+            <td>{{ role.details.description }}</td>
+            <td>{{ role.details.responsibilities }}</td>
+              <td><a href="{{ role.details.sharepointURL }}">{{ role.details.sharepointURL }}</a></td>              
+            <td>{{ role.details.numberOfOpenPositions }}</td>
+            <td>{{ role.details.statusName }}</td>
             <td>{{ role.closingDate | date}}</td>
         </tr>
       </tbody>

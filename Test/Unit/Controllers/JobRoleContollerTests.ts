@@ -18,8 +18,15 @@ const jobRoleResponse: JobRoleResponse = {
     capabilityId: 101,
     capabilityName: "Software Development"
   }
-};
 
+};
+const JobRoleDetails: JobRoleDetails = {
+  description: "Develop and maintain software applications."
+  responsibilities: "Write clean, scalable code.",
+  sharepointURL: "http://sharepoint.company.com/software-engineer",
+  statusId:  1,
+  numberOfOpenPositions: 3
+  },
 describe("JobRoleController", function () {
   afterEach(() => {
     sinon.restore();

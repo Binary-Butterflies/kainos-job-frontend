@@ -9,5 +9,5 @@ export type JobRoleDetailedResponse = {
     closingDate: Date,
     band: Band,
     capability: Capability,
-    jobRoleDetails: JobRoleDetails
+    details: JobRoleDetails
 };
