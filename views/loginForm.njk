@@ -1,43 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kainos Jobs</title>
-    <link rel="shortcut icon" href="/resources/images/favicon.webp" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-    <script src="/js/bootstrap.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/3.2.3/nunjucks.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  </head>
+{% extends "include/basePage.njk" %}
 
-  <body>
-    {% include "include/header.njk" %}
+{% block content %}
+<form class="form" action = "/login" method="post">
+    <h1 class="mb-3">Login</h1>
+    <div class="input-group">
+      <span class="input-group-text mb-5" id="input-group-left">Email:</span>
+      <input type="text" class="form-control mb-5" id="email" name="email" value="{{email}}" placeholder="email" aria-label="email" aria-describedby="input-group-left">
+    </div>
+    <div class="input-group">
+      <span class="input-group-text mb-3" id="input-group-left">Password:</span>
+      <input type="password" class="form-control mb-3" id="password" name="password" value="{{password}}" placeholder="password" aria-label="password" aria-describedby="input-group-left">
+    </div>
 
-    <form class = "form" action = "/login" method = "post">
-      <div class="container-sm">
-        <h1 class="mb-3">Login</h1>
-        <div class="input-group">
-          <span class="input-group-text mb-5" id="input-group-left">Email:</span>
-          <input type="text" class="form-control mb-5" id="email" name="email" value="{{email}}" placeholder="email" aria-label="email" aria-describedby="input-group-left">
-        </div>
-        <div class="input-group">
-          <span class="input-group-text mb-3" id="input-group-left">Password:</span>
-          <input type="password" class="form-control mb-3" id="password" name="password" value="{{password}}" placeholder="password" aria-label="password" aria-describedby="input-group-left">
-        </div>
+    {% if errormessage %}
+      <h3 class="mb-2 mt-2">{{errormessage}}</h3>
+    {% endif %}
 
-        {% if errormessage %}
-          <h3 class="mb-2 mt-2">{{errormessage}}</h3>
-        {% endif %}
+    <br></br>
 
-        <br></br>
-
-        <button id="submit" type="submit" class="btn btn-primary" style="background-color: #283583">Login</button>
-
-      </div>
-
-    </form>
-
-    {% include "include/footer.njk" %}
-    </body>
-</html>
+    <button id="submit" type="submit" class="btn btn-primary" style="background-color: #283583">Login</button>
+</form>
+{% endblock %}

@@ -8,7 +8,8 @@
     "start": "tsc && cp -r ./resources/ ./dist/resources/ && node dist/src/app.js",
     "dev": "nodemon src/app.ts",
     "linter": "npx eslint .",
-    "test": "mocha -r ts-node/register 'test/**/*.ts'"
+    "test": "mocha -r ts-node/register 'test/**/*.ts'",
+    "sass": "sass -w sass/:resources/stylesheets/"
   },
   "keywords": [],
   "author": "Shaun Ganley <shaung@kainos.com>",
@@ -48,6 +49,7 @@
     "eslint": "^8.57.1",
     "globals": "^15.13.0",
     "nodemon": "^3.1.0",
+    "sass": "^1.83.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.2",
     "typescript": "^5.4.5",

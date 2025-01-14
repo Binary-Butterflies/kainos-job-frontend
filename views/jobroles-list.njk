@@ -1,55 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "include/basePage.njk" %}
 
-   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kainos Jobs</title>
-    <link rel="shortcut icon" href="/resources/images/favicon.webp" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-    <script src="/js/bootstrap.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/3.2.3/nunjucks.min.js"></script>
-  </head>
-  <body>
-    {% include "include/header.njk" %}
+{% block content %}
+  <h1 class="text-center mb-4">Open Job Roles at Kainos</h1>
 
-    <div class="container mt-5">
-      <h1 class="text-center mb-4">Open Job Roles at Kainos</h1>
-
-      {% if errormessage %}
-        <div class="alert alert-danger">{{ errormessage }}</div>
-      {% else %}
-        {% if jobRoles %}
-          <table class="table table-striped">
-            <thead class="thead-dark">
-              <tr>
-                <th>Role Name</th>
-                <th>Location</th>
-                <th>Capability</th>
-                <th>Band</th>
-                <th>Closing Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for role in jobRoles | sort %}
-                <tr>
-                  <td>
-                    <a href="/job-roles/{{ role.id }}">{{ role.roleName }}</a>
-                  </td>
-                  <td>{{ role.location }}</td>
-                  <td>{{ role.capability.capabilityName }}</td>
-                  <td>{{ role.band.bandName }}</td>
-                  <td>{{ role.closingDate | date }}</td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        {% else %}
-          <p class="text-center">No job roles available at the moment.</p>
-        {% endif %}
-      {% endif %}
-    </div>
-
-    {% include "include/footer.njk" %}
-  </body>
-</html>
+  {% if errormessage %}
+    <div class="alert alert-danger">{{ errormessage }}</div>
+  {% else %}
+    {% if jobRoles %}
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Role Name</th>
+            <th>Location</th>
+            <th>Capability</th>
+            <th>Band</th>
+            <th>Closing Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for role in jobRoles | sort %}
+            <tr>
+              <td>
+                <a href="/job-roles/{{ role.id }}">{{ role.roleName }}</a>
+              </td>
+              <td>{{ role.location }}</td>
+              <td>{{ role.capability.capabilityName }}</td>
+              <td>{{ role.band.bandName }}</td>
+              <td>{{ role.closingDate | date }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="text-center">No job roles available at the moment.</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}

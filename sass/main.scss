@@ -1,0 +1,38 @@
+$kainos-colors: (
+  "kainos-blue": #283583,
+  "kainos-green": #61a83f,
+  "kainos-mid-blue": #41679f,
+  "kainos-dark-green": #004631,
+  "kainos-grey": #575756,
+  "kainos-orange": #ec6608,
+  "kainos-bright-green": #cfd600,
+  "kainos-bright-blue": #009fe3,
+);
+
+$theme-colors: (
+  "primary": map-get($map: $kainos-colors, $key: "kainos-blue"),
+  "secondary": map-get($map: $kainos-colors, $key: "kainos-grey"),
+  "success": map-get($map: $kainos-colors, $key: "kainos-green"),
+  "info": map-get($map: $kainos-colors, $key: "kainos-bright-blue"),
+);
+
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $kainos-colors);
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.bg-kainos-gradient {
+  background-image: linear-gradient(to right,
+    map-get($map: $kainos-colors, $key: "kainos-green"),
+    map-get($map: $kainos-colors, $key: "kainos-mid-blue")
+  );
+}
