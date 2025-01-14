@@ -1,10 +1,8 @@
 name: pa11y tests
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  schedule:
+    - cron: '0 3 * * *'
 
 jobs:
   build:
@@ -19,15 +17,15 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v2
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
       - name: Start server
         run: npm run start
 
       - name: Run pa11y-ci
         run: |
-            npm run pa11y
+          npm run pa11y
