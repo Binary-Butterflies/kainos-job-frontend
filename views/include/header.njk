@@ -1,18 +1,26 @@
-<div class="container">
-  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-      <img src="images/kainos.png" alt="Kainos Logo" class="bi me-2" width="120" role="img">
-    </a>
-
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <li>
-        <a href="jobroles" class="nav-link px-2 link-dark">Job Roles</a>
-      </li>
-    </ul>
-
-    <div class="col-md-3 text-end">
-      <a class="btn btn-outline-primary me-2" href="login">Log in</a>
-      <a class="btn btn-primary me-2" href="register">Sign up</a>
+<div class="sticky-top bg-white mb-3">
+  <nav class="navbar navbar-expand-lg navbar-light border-bottom mt-0">
+    <div class="container container-fluid">
+      <a href="/" class="navbar-brand">
+        <img src="images/kainos.png" alt="Kainos Logo" class="bi me-2" width="120" role="img">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a href="/" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="jobroles" class="nav-link">Job Roles</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <a class="btn btn-outline-primary me-2 border-3 rounded-0" href="/login">Login</a>
+          <a class="btn btn-primary border-3 rounded-0" href="/register">Register</a>
+        </form>
+      </div>
     </div>
-  </header>
+  </nav>
 </div>
