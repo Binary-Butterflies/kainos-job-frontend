@@ -1,4 +1,4 @@
-import { getIndex, getJobRoles } from "./controllers/JobRoleController";
+import { getIndex, getJobRole, getJobRoles } from "./controllers/JobRoleController";
 import express from "express";
 import nunjucks from "nunjucks";
 import bodyParser from "body-parser";
@@ -62,7 +62,8 @@ app.listen(3000, () => {
 });
 
 app.get("/", getIndex);
-app.get("/jobRoles", allowRoles([UserRole.Admin, UserRole.User]), getJobRoles);
+app.get("/jobRoles", getJobRoles);
+app.get('/jobRole/:id', getJobRole);
 
 app.get("/login", getLoginForm);
 app.post("/login", postLoginForm);

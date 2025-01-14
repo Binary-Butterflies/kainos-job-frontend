@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Job Roles at kainos</title>
+  <title>Job Role</title>
   <link rel="icon" type="image/x-icon" href="https://www.kainos.com/globalassets/images/5_logos/kainos_logo.png">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="/stylesheets/kainos-styles.css">
@@ -45,14 +45,14 @@
       <img src="https://www.kainos.com/globalassets/images/5_logos/kainos_logo.png" alt="Kainos Logo"
         style="max-width: 200px;">
     </div>
-    <h1 class="text-center mb-4">Open Job Roles at Kainos</h1>
+    <h1 class="text-center mb-4">Hello Job Roles at Kainos</h1>
 
     {% if errormessage %}
     <div class="alert alert-danger">{{ errormessage }}</div>
     {% endif %}
 
 
-    {% if jobRoles %}
+    {% if jobRole %}
     <table class="table table-striped">
       <thead class="thead-dark">
         <tr>
@@ -60,19 +60,27 @@
           <th>Location</th>
           <th>Capability</th>
           <th>Band</th>
+          <th>Description</th>
+          <th>Responsibilities</th>
+          <th>Sharepoint URL</th>
+          <th>Number Of Open Positions</th>
+          <th>Status</th>
           <th>Closing Date</th>
         </tr>
       </thead>
       <tbody>
-        {% for role in jobRoles | sort %}
         <tr>
-          <td><a href="/jobrole/{{ role.id }}">{{ role.roleName }}</a></td>
-          <td>{{ role.location }}</td>
-          <td>{{ role.capability.capabilityName }}</td>
-          <td>{{ role.band.bandName }}</td>
-          <td>{{ role.closingDate | date }}</td>
+            <td><a href="/jobrole/{{ role.id }}">{{ role.roleName }}</a></td>
+            <td>{{ role.location }}</td>
+            <td>{{ role.capability.capabilityName }}</td>
+            <td>{{ role.band.bandName }}</td>
+            <td>{{ role.jobRoleDetails.description }}</td>
+            <td>{{ role.jobRoleDetails.responsibilities }}</td>
+            <td>{{ role.jobRoleDetails.sharepointURL }}</td>
+            <td>{{ role.jobRoleDetails.numberOfOpenPositions }}</td>
+            <td>{{ role.jobRoleDetails.statusName }}</td>
+            <td>{{ role.closingDate | date}}</td>
         </tr>
-        {% endfor %}
       </tbody>
     </table>
     {% else %}
