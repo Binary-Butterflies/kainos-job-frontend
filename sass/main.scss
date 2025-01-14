@@ -13,14 +13,14 @@ $theme-colors: (
   "primary": map-get($map: $kainos-colors, $key: "kainos-blue"),
   "secondary": map-get($map: $kainos-colors, $key: "kainos-grey"),
   "success": map-get($map: $kainos-colors, $key: "kainos-green"),
-  "info": map-get($map: $kainos-colors, $key: "kainos-bright-blue"),
+  "warning": map-get($map: $kainos-colors, $key: "kainos-orange"),
+  "info": map-get($map: $kainos-colors, $key: "kainos-bright-blue")
 );
 
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/mixins";
 
-// Merge the maps
 $theme-colors: map-merge($theme-colors, $kainos-colors);
 
 @import "../node_modules/bootstrap/scss/bootstrap";
