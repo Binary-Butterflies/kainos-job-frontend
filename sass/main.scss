@@ -9,7 +9,7 @@ $kainos-colors: (
   "kainos-bright-blue": #009fe3,
 );
 
-$theme-colors: (
+$theme-colors-overrides: (
   "primary": map-get($map: $kainos-colors, $key: "kainos-blue"),
   "secondary": map-get($map: $kainos-colors, $key: "kainos-grey"),
   "success": map-get($map: $kainos-colors, $key: "kainos-green"),
@@ -17,11 +17,15 @@ $theme-colors: (
   "info": map-get($map: $kainos-colors, $key: "kainos-bright-blue")
 );
 
+
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/mixins";
 
+$theme-colors: map-merge($theme-colors, $theme-colors-overrides);
 $theme-colors: map-merge($theme-colors, $kainos-colors);
+$btn-border-width: 3px;
+$enable-rounded: false;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 
