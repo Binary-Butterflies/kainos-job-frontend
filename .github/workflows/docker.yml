@@ -26,7 +26,7 @@ jobs:
 
     - name: Build & push the Docker image
       env:
-        SESSION_SECRET: ${{ secrets.SESSION_SECRETS }}
+        SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
         SESSION_EXPIRY: ${{ secrets.SESSION_EXPIRY }}
         API_URL: ${{ secrets.API_URL }}
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
