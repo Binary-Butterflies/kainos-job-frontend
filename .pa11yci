@@ -1,0 +1,8 @@
+{
+    "urls": [
+        "http://localhost:3000/",
+        "http://localhost:3000/jobroles",
+        "http://localhost:3000/register",
+        "http://localhost:3000/login"
+    ]
+}
