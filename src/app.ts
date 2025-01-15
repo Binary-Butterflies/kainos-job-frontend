@@ -62,7 +62,7 @@ app.listen(3000, () => {
 });
 
 app.get("/", getIndex);
-app.get("/jobRoles", getJobRoles);
+app.get("/jobRoles", allowRoles([UserRole.Admin, UserRole.User]), getJobRoles);
 app.get('/jobRole/:id', getJobRole);
 
 app.get("/login", getLoginForm);

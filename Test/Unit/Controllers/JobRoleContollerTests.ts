@@ -5,8 +5,6 @@ import { expect } from "chai";
 import { JobRoleResponse } from "../../../src/models/JobRoleResponse";
 import { JobRoleDetailedResponse } from '../../../src/models/JobRoleDetailedResponse';
 import sinon from "sinon";
-import { request } from 'http';
-import { getToken } from '../../../src/services/AuthServices';
 
 const jobRoleResponse: JobRoleResponse = {
   jobRoleId: 123,
@@ -83,7 +81,7 @@ describe("JobRoleController", function () {
 
       sinon.stub(JobRoleService, "getAllJobRoles").rejects(new Error(errorMessage));
 
-      const req = { };
+      const req = { session: { token: 'test' } };
       const res = { render: sinon.spy(), locals: { errormessage: errorMessage } };
 
       await JobRoleController.getJobRoles(req as unknown as Request, res as unknown as Response);

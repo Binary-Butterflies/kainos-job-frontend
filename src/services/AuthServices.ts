@@ -18,7 +18,7 @@ export const getToken = async function (
     return response.data;
   } catch (e) {
     logService.error(() => e);
-    throw new Error("Failed to get employee");
+    throw new Error("Failed to get job role");
   }
 };
 
@@ -34,6 +34,6 @@ export const createUser = async function (
     return response.data;
   } catch (e) {
     logService.error(() => e);
-    throw new Error("Failed to create employee");
+    throw new Error("Failed to create job role");
   }
 };

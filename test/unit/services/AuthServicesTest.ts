@@ -10,7 +10,7 @@ import { RegisterRequest } from "../../../src/models/RegisterRequest";
 
 chai.use(chaiAsPromised);
 
-const URL = "http://localhost:8080/api/auth/";
+const URL = axios.defaults.baseURL + "api/auth/"
 const mock = new MockAdapter(axios);
 const loginRequest: LoginRequest = {
   email: "Terry@gmail.com",
@@ -28,6 +28,7 @@ describe("AuthService", function () {
   afterEach(() => {
     sinon.restore();
   });
+  
   describe("login", function () {
     it("should return token", async () => {
       mock.onPost(URL+"login", loginRequest).reply(200, token);
@@ -40,7 +41,7 @@ describe("AuthService", function () {
       mock.onPost(URL+"login", ).reply(500);
 
       await getToken(loginRequest).catch((e) => {
-        expect(e.message).to.equal("Failed to get employee");
+        expect(e.message).to.equal("Failed to get job role");
       });
     });
   });
@@ -48,7 +49,7 @@ describe("AuthService", function () {
     it("should throw exception when 500 returned by axios", async () => {
       mock.onPost(URL+"register", badRegisterRequest).reply(500);
       await createUser(badRegisterRequest).catch((e) => {
-        expect(e.message).to.equal("Failed to create employee");
+        expect(e.message).to.equal("Failed to create job role");
       });
     });
   });
