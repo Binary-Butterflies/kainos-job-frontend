@@ -62,7 +62,6 @@
           <th>Band</th>
           <th>Description</th>
           <th>Responsibilities</th>
-          <th>Sharepoint URL</th>
           <th>Number Of Open Positions</th>
           <th>Status</th>
           <th>Closing Date</th>
@@ -70,13 +69,12 @@
       </thead>
       <tbody>
         <tr>
-            <td>{{ role.roleName }}</td>
+            <td><a href="{{ role.details.sharepointURL }}">{{ role.roleName }}</a></td>
             <td>{{ role.location }}</td>
             <td>{{ role.capability.capabilityName }}</td>
             <td>{{ role.band.bandName }}</td>
             <td>{{ role.details.description }}</td>
-            <td>{{ role.details.responsibilities }}</td>
-              <td><a href="{{ role.details.sharepointURL }}">{{ role.details.sharepointURL }}</a></td>              
+            <td>{{ role.details.responsibilities }}</td>  
             <td>{{ role.details.numberOfOpenPositions }}</td>
             <td>{{ role.details.statusName }}</td>
             <td>{{ role.closingDate | date}}</td>

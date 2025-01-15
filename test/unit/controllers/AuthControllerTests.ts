@@ -27,12 +27,12 @@ describe("AuthController", function () {
 
     it("should render login form with error message when error thrown", async () => {
       sinon.restore();
-      const errorMessage: string = "Error message";
+      const errorMessage: string = "Failed to login";
       sinon.stub(AuthServices, "getToken").rejects(new Error(errorMessage));
       const req = {};
       const res = {
         render: sinon.spy(),
-        locals: { errormessage: "Error message" },
+        locals: { errormessage: "Failed to login" },
       };
 
       await AuthController.postLoginForm(
@@ -58,12 +58,12 @@ describe("AuthController", function () {
 
     it("should render register form with error message when error thrown", async () => {
       sinon.restore();
-      const errorMessage: string = "Error message";
+      const errorMessage: string = "Failed to register";
       sinon.stub(AuthServices, "createUser").rejects(new Error(errorMessage));
       const req = {};
       const res = {
         render: sinon.spy(),
-        locals: { errormessage: "Error message" },
+        locals: { errormessage: "Failed to register" },
       };
 
       await AuthController.postRegistrationForm(
