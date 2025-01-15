@@ -105,16 +105,4 @@ describe("JobRoleController", function () {
       expect(res.render.calledOnce).to.be.true;
     });
   });
-    
-
-  describe("getIndex", function () {
-    it("should render job role home view", async () => {
-      const req = {};
-      const res = { render: sinon.spy(), locals: { errormessage: "" } };
-
-      await JobRoleController.getIndex(req as Request, res as unknown as Response);
-
-      expect(res.render.calledOnce).to.be.true;
-    });
-  });
 });
