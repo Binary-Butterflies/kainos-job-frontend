@@ -24,6 +24,7 @@ $theme-colors-overrides: (
 
 $theme-colors: map-merge($theme-colors, $theme-colors-overrides);
 $theme-colors: map-merge($theme-colors, $kainos-colors);
+
 $btn-border-width: 3px;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
