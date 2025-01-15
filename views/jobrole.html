@@ -45,7 +45,7 @@
       <img src="https://www.kainos.com/globalassets/images/5_logos/kainos_logo.png" alt="Kainos Logo"
         style="max-width: 200px;">
     </div>
-    <h1 class="text-center mb-4">Hello Job Roles at Kainos</h1>
+    <h1 class="text-center mb-4">{{ role.roleName }} at {{ role.location }}</h1>
 
     {% if errormessage %}
     <div class="alert alert-danger">{{ errormessage }}</div>
