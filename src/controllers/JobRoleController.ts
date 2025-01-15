@@ -19,7 +19,13 @@ export const getJobRoles = async (req: express.Request, res: express.Response): 
 export const getJobRole = async (req: express.Request, res: express.Response): Promise<void> => {
     try {
         logService.info(() => `getJobRoleById: ${req.params.id}`);
-        res.render('jobrole', { role: await getSingleJobRole(req.params.id, req.session.token) });
+        const role = await getSingleJobRole(req.params.id, req.session.token);
+
+        if (role == null) {
+            throw new Error('Failed to get Job Role');
+        }
+
+        res.render('jobrole.njk', { role: role });
     } catch (e) {
         if (e?.response?.status === 404) {
             res.locals.errormessage = 'Job Role does not exist';
@@ -28,6 +34,6 @@ export const getJobRole = async (req: express.Request, res: express.Response): P
         }
 
         logService.error(() => res.locals.errormessage);
-        res.render('jobrole');
+        res.render('jobrole-error.njk');
     }
 };

@@ -1,0 +1,11 @@
+{% extends "include/basePage.njk" %}
+
+{% block content %}
+<div class="flex-grow-1 container mx-auto text-center">
+    <br><br><br><br>
+    <h1 class="text-center big-heading mt-5">Error!</h1>
+    <h2 class="text-center big-subheading mb-5">{{ errormessage }}</h2>
+    <a class="btn btn-outline-primary fs-4" href="/jobroles">Take me back</a>
+    <br><br><br><br>
+</div>
+{% endblock %}
