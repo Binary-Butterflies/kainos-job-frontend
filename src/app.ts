@@ -1,11 +1,13 @@
-import { getJobRoles } from "./controllers/JobRoleController";
+import dotenv from "dotenv";
+dotenv.config();
+
+import { getIndex, getJobRole, getJobRoles } from "./controllers/JobRoleController";
 import express from "express";
 import nunjucks from "nunjucks";
 import bodyParser from "body-parser";
 import session from "express-session";
 import { dateFilter } from "./filter/DateFilter";
 import { getLogger } from "./LogConfig";
-import dotenv from "dotenv";
 import {
   getLoginForm,
   getRegistrationForm,
@@ -18,7 +20,6 @@ import { allowRoles } from "./middleware/AuthMiddleware";
 import { UserRole } from "./models/UserRole";
 import * as path from "path";
 
-dotenv.config();
 const appLogger = getLogger("app");
 const app = express();
 
@@ -73,6 +74,7 @@ app.listen(3000, () => {
 // app.use("/", express.static("node_modules/bootstrap/dist"));
 
 app.get("/jobRoles", allowRoles([UserRole.Admin, UserRole.User]), getJobRoles);
+app.get('/jobRole/:id', allowRoles([UserRole.Admin, UserRole.User]), getJobRole);
 
 app.get("/login", getLoginForm);
 app.post("/login", postLoginForm);
