@@ -1,106 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "include/basePage.njk" %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Job Role</title>
-  <link rel="icon" type="image/x-icon" href="https://www.kainos.com/globalassets/images/5_logos/kainos_logo.png">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/stylesheets/kainos-styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/3.2.3/nunjucks.min.js"></script>
+{% block content %}
+  <div class="flex-grow-1 container mt-5 w-50 p-5 mx-auto">
+    {% if errormessage %}
+      <div class="alert alert-danger">{{ errormessage }}</div>
+    {% elif role %}
+      <h1 class="text-center mb-4 job-title">{{ role.roleName }}</h1>
 
-</head>
+      <br>
 
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
-      <img src="https://www.kainos.com/globalassets/images/5_logos/kainos_logo.png" alt="Kainos Logo"
-        style="height: 40px;">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
+      <p class="job-header mt-5">Job Description</p>
+      <p>{{ role.details.description }}</p>
+
+      <p class="job-header mt-5">Responsibilities</p>
+      <p>{{ role.details.responsibilities }}</p>
+
+      <p class="job-header mt-5">Job Details</p>
+
+      <ul>
+        <li>
+          <span class="job-detail-title mt-5">Location:</span>
+          <span class="job-detail-text">{{ role.location }}</span>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Job Roles</a>
+        <li>
+          <span class="job-detail-title mt-5">Capability:</span>
+          <span class="job-detail-text">{{ role.capability.capabilityName }}</span>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
+        <li>
+          <span class="job-detail-title mt-5">Band:</span>
+          <span class="job-detail-text">{{ role.band.bandName }}</span>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+        <li>
+          <span class="job-detail-title mt-5">Open Positions:</span>
+          <span class="job-detail-text">{{ role.details.numberOfOpenPositions }}</span>
+        </li>
+        <li>
+          <span class="job-detail-title mt-5">Closing Date:</span>
+          <span class="job-detail-text">{{ role.closingDate | date }}</span>
+        </li>
+        <li>
+          <span class="job-detail-title mt-5">Listing Status:</span>
+          <span class="job-detail-text">{{ role.details.statusName }}</span>
         </li>
       </ul>
-    </div>
-  </nav>
 
-  <div class="container mt-5">
-    <div class="text-center mb-4">
-      <img src="https://www.kainos.com/globalassets/images/5_logos/kainos_logo.png" alt="Kainos Logo"
-        style="max-width: 200px;">
-    </div>
-    <h1 class="text-center mb-4">{{ role.roleName }} at {{ role.location }}</h1>
+      {% if role.details.statusName == "Open" %}
+        <a href="#" class="btn btn-primary fs-4 mt-5">Apply Now</a>
+      {% else %}
+        <button type="button" class="btn btn-primary fs-4 mt-5" disabled>Applications Closed</button>
+      {% endif %}
+      {% if role.details.sharepointURL %}
+        <a href="{{ role.details.sharepointURL }}" class="btn btn-outline-secondary fs-4 mt-5 ms-3">More Details</a>
+      {% endif %}
 
-    {% if errormessage %}
-    <div class="alert alert-danger">{{ errormessage }}</div>
-    {% endif %}
-
-
-    {% if role %}
-    <table class="table table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th>Role Name</th>
-          <th>Location</th>
-          <th>Capability</th>
-          <th>Band</th>
-          <th>Description</th>
-          <th>Responsibilities</th>
-          <th>Number Of Open Positions</th>
-          <th>Status</th>
-          <th>Closing Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-            <td><a href="{{ role.details.sharepointURL }}">{{ role.roleName }}</a></td>
-            <td>{{ role.location }}</td>
-            <td>{{ role.capability.capabilityName }}</td>
-            <td>{{ role.band.bandName }}</td>
-            <td>{{ role.details.description }}</td>
-            <td>{{ role.details.responsibilities }}</td>  
-            <td>{{ role.details.numberOfOpenPositions }}</td>
-            <td>{{ role.details.statusName }}</td>
-            <td>{{ role.closingDate | date}}</td>
-        </tr>
-      </tbody>
-    </table>
+      {# <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Role Name</th>
+            <th>Location</th>
+            <th>Capability</th>
+            <th>Band</th>
+            <th>Description</th>
+            <th>Responsibilities</th>
+            <th>Number Of Open Positions</th>
+            <th>Status</th>
+            <th>Closing Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+              <td><a href="{{ role.details.sharepointURL }}">{{ role.roleName }}</a></td>
+              <td>{{ role.location }}</td>
+              <td>{{ role.capability.capabilityName }}</td>
+              <td>{{ role.band.bandName }}</td>
+              <td>{{ role.details.description }}</td>
+              <td>{{ role.details.responsibilities }}</td>  
+              <td>{{ role.details.numberOfOpenPositions }}</td>
+              <td>{{ role.details.statusName }}</td>
+              <td>{{ role.closingDate | date}}</td>
+          </tr>
+        </tbody>
+      </table> #}
     {% else %}
-    <p class="text-center">No job roles available at the moment.</p>
+      <div class="alert alert-danger">Failed to fetch role information.</div>
     {% endif %}
-
-
   </div>
-
-  <footer class="bg-dark text-white py-4 mt-5">
-    <div class="container text-center">
-      <p>&copy; Kainos All rights reserved.</p>
-      <p>
-        <a href="#" class="text-white mr-3">Privacy Policy</a>
-        <a href="#" class="text-white">Terms of Use</a>
-      </p>
-    </div>
-  </footer>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-
-</html>
+{% endblock %}

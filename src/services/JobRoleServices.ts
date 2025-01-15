@@ -12,7 +12,7 @@ export const getAllJobRoles = async (token: string): Promise<JobRoleResponse[]> 
     try {
         logService.info(() => "getAllJobRoles")
         const response: AxiosResponse = await axiosInstance.get(URL, getHeader(token));
-
+        
         return response.data;
     } catch (e) {
         logService.error(() => e.message)
@@ -20,9 +20,10 @@ export const getAllJobRoles = async (token: string): Promise<JobRoleResponse[]> 
     }
 }
 
-export const getSingleJobRole = async function (id: string): Promise<JobRoleDetailedResponse> {
+export const getSingleJobRole = async function (id: string, token: string): Promise<JobRoleDetailedResponse> {
     try {
-        const response: AxiosResponse = await axiosInstance.get(URL + id);
+        logService.info(() => "getSingleJobRole/" + id)
+        const response: AxiosResponse = await axiosInstance.get(URL + id, getHeader(token));
 
         return response.data;
     } catch (e) {

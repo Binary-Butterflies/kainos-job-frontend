@@ -16,7 +16,7 @@ export const getJobRoles = async (req: express.Request, res: express.Response): 
 export const getJobRole = async (req: express.Request, res: express.Response): Promise<void> => {
     try {
         logService.info(() => `getJobRoleById: ${req.params.id}`);
-        res.render('jobrole', { role: await getSingleJobRole(req.params.id) });
+        res.render('jobrole', { role: await getSingleJobRole(req.params.id, req.session.token) });
     } catch (e) {
         res.locals.errormessage = e.message;
         logService.error(() => `Error fetching job role with ID ${req.params.id}: ${e.message}`);

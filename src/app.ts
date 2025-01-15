@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import { getIndex, getJobRole, getJobRoles } from "./controllers/JobRoleController";
+import { getJobRole, getJobRoles } from "./controllers/JobRoleController";
 import express from "express";
 import nunjucks from "nunjucks";
 import bodyParser from "body-parser";

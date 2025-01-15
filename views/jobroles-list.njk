@@ -1,7 +1,7 @@
 {% extends "include/basePage.njk" %}
 
 {% block content %}
-<div class="p-5 mx-auto">
+<div class="flex-grow-1 container mx-auto p-5 mx-auto">
   <br>
   <br>
   <h1 class="text-center mb-4">Open Job Roles at Kainos</h1>
@@ -29,7 +29,7 @@
             {% for role in jobRoles | sort %}
               <tr>
                 <td>
-                  <a href="/job-roles/{{ role.id }}">{{ role.roleName }}</a>
+                  <a href="/jobrole/{{role.jobRoleId}}">{{ role.roleName }}</a>
                 </td>
                 <td>{{ role.location }}</td>
                 <td>{{ role.capability.capabilityName }}</td>
