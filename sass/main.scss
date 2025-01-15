@@ -25,7 +25,6 @@ $theme-colors-overrides: (
 $theme-colors: map-merge($theme-colors, $theme-colors-overrides);
 $theme-colors: map-merge($theme-colors, $kainos-colors);
 $btn-border-width: 3px;
-$enable-rounded: false;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 
@@ -39,4 +38,9 @@ html, body {
     map-get($map: $kainos-colors, $key: "kainos-green"),
     map-get($map: $kainos-colors, $key: "kainos-mid-blue")
   );
+}
+
+.login-input {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
