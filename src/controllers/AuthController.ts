@@ -28,8 +28,16 @@ export const postLoginForm = async (
     req.session.token = await getToken(req.body);
     res.redirect("/");
   } catch (e) {
-    controllerLogger.error("Failed to login");
-    res.locals.errormessage = "Failed to login"
+    let errorMessage = "Failed to login"
+
+    if (e?.response?.status === 400) {
+      if (e.response.data == "User is not valid: Invalid Credentials") {
+        errorMessage = "Incorrect Email or Password";
+      }
+    }
+
+    controllerLogger.error(errorMessage);
+    res.locals.errormessage = errorMessage;
     res.render("loginForm.njk", { ...req.query, ...req.body });
   }
 };
@@ -60,8 +68,20 @@ export const postRegistrationForm = async (
     await createUser(req.body);
     res.redirect("/login");
   } catch (e) {
-    controllerLogger.error("Failed to register");
-    res.locals.errormessage = "Failed to register"
+    let errorMessage = "Failed to register"
+
+    if (e?.response?.status === 400) {
+      if (e.response.data.startsWith("User is not valid: Invalid email")) {
+        errorMessage = "Please enter a valid Email";
+      } else if (e.response.data == "User is not valid: Password cannot be blank") {
+        errorMessage = "Please enter a password";
+      } else if (e.response.data == "User is not valid: User already exists") {
+        errorMessage = "Email already in use";
+      }
+    }
+
+    controllerLogger.error(errorMessage);
+    res.locals.errormessage = errorMessage
     res.render("registrationForm.njk", req.body);
   }
 };

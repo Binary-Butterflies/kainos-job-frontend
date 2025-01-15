@@ -15,8 +15,8 @@ export const getAllJobRoles = async (token: string): Promise<JobRoleResponse[]> 
         
         return response.data;
     } catch (e) {
-        logService.error(() => e.message)
-        throw new Error("Could not get job roles");
+        logService.error(() => e);
+        throw e;
     }
 }
 
@@ -27,18 +27,8 @@ export const getSingleJobRole = async function (id: string, token: string): Prom
 
         return response.data;
     } catch (e) {
-        if (e?.response?.status === undefined) {
-            throw new Error(e.message);
-        }
-
-        switch (e.response.status) {
-            case 400:
-                throw new Error('Job Role does not exist');
-            case 500:
-                throw new Error('Failed to get Job Role');
-            default:
-                throw new Error(e.message);
-        }
+        logService.error(() => e);
+        throw e;
     }
 }
 

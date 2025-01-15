@@ -20,7 +20,7 @@ export const getToken = async function (
     return response.data;
   } catch (e) {
     logService.error(() => e);
-    throw new Error("Failed to login");
+    throw e;
   }
 };
 
@@ -37,6 +37,6 @@ export const createUser = async function (
     return response.data;
   } catch (e) {
     logService.error(() => e);
-    throw new Error("Failed to create user");
+    throw e;
   }
 };
