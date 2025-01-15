@@ -1,8 +1,8 @@
-import axios from "axios";
+import { axiosInstance } from "../../../src/services/AxiosService";
 import MockAdapter from "axios-mock-adapter";
 import { LoginRequest } from "../../../src/models/LoginRequest";
 import sinon from "sinon";
-import { createUser, getToken } from "../../../src/services/AuthServices";
+import { URL, createUser, getToken } from "../../../src/services/AuthServices";
 import { expect } from "chai";
 import * as chai from "chai";
 import chaiAsPromised from "chai-as-promised";
@@ -10,8 +10,6 @@ import { RegisterRequest } from "../../../src/models/RegisterRequest";
 
 chai.use(chaiAsPromised);
 
-const URL = axios.defaults.baseURL + "api/auth/"
-const mock = new MockAdapter(axios);
 const loginRequest: LoginRequest = {
   email: "Terry@gmail.com",
   password: "Terry",
@@ -25,6 +23,11 @@ const badRegisterRequest: RegisterRequest = {
 const token = "MyMockToken";
 
 describe("AuthService", function () {
+  let mock: MockAdapter;
+  this.beforeEach(() => {
+    mock = new MockAdapter(axiosInstance);
+  })
+
   afterEach(() => {
     sinon.restore();
   });
@@ -38,10 +41,10 @@ describe("AuthService", function () {
     });
 
     it("should throw exception when 500 returned by axios", async () => {
-      mock.onPost(URL+"login", ).reply(500);
+      mock.onPost(URL+"login", loginRequest).reply(500);
 
       await getToken(loginRequest).catch((e) => {
-        expect(e.message).to.equal("Failed to get job role");
+        expect(e.message).to.equal("Failed to login");
       });
     });
   });
@@ -49,7 +52,7 @@ describe("AuthService", function () {
     it("should throw exception when 500 returned by axios", async () => {
       mock.onPost(URL+"register", badRegisterRequest).reply(500);
       await createUser(badRegisterRequest).catch((e) => {
-        expect(e.message).to.equal("Failed to create job role");
+        expect(e.message).to.equal("Failed to create user");
       });
     });
   });

@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import { getIndex, getJobRole, getJobRoles } from "./controllers/JobRoleController";
 import express from "express";
 import nunjucks from "nunjucks";
@@ -5,7 +8,6 @@ import bodyParser from "body-parser";
 import session from "express-session";
 import { dateFilter } from "./filter/DateFilter";
 import { getLogger } from "./LogConfig";
-import dotenv from "dotenv";
 import {
   getLoginForm,
   getRegistrationForm,
@@ -14,13 +16,9 @@ import {
 } from "./controllers/AuthController";
 import { allowRoles } from "./middleware/AuthMiddleware";
 import { UserRole } from "./models/UserRole";
-import axios from "axios";
 
-dotenv.config();
 const appLogger = getLogger("app");
 const app = express();
-
-axios.defaults.baseURL = process.env.API_URL || 'http://localhost:8080/';
 
 declare module "express-session" {
   interface SessionData {

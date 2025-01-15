@@ -1,11 +1,13 @@
-import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { expect } from "chai";
-import { getAllJobRoles, getSingleJobRole, URL } from "../../../src/services/JobRoleServices";
-
-const mock = new MockAdapter(axios);
+import { URL, getAllJobRoles, getSingleJobRole } from "../../../src/services/JobRoleServices";
+import { axiosInstance } from "../../../src/services/AxiosService";
 
 describe("JobRoleService", function () {
+  let mock: MockAdapter;
+  this.beforeEach(() => {
+    mock = new MockAdapter(axiosInstance);
+  })
 
   describe("getAllJobRoles", function () {
 
