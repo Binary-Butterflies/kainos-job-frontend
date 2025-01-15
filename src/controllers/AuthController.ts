@@ -11,6 +11,14 @@ export const getLoginForm = async (
   res.render("loginForm.njk", req.query);
 };
 
+export const getUnauthorised = async (
+  req: express.Request,
+  res: express.Response
+): Promise<void> => {
+  controllerLogger.info("GET-ing unauthorised page");
+  res.render("unauthorised.njk");
+};
+
 export const postLoginForm = async (
   req: express.Request,
   res: express.Response

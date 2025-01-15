@@ -1,4 +1,4 @@
-import { getIndex, getJobRoles } from "./controllers/JobRoleController";
+import { getJobRoles } from "./controllers/JobRoleController";
 import express from "express";
 import nunjucks from "nunjucks";
 import bodyParser from "body-parser";
@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 import {
   getLoginForm,
   getRegistrationForm,
+  getUnauthorised,
   postLoginForm,
   postLogout,
   postRegistrationForm,
@@ -69,13 +70,21 @@ app.listen(3000, () => {
   appLogger.info("Server started on port 3000");
 });
 
-app.use("/",express.static("node_modules/bootstrap/dist"));
+// app.use("/", express.static("node_modules/bootstrap/dist"));
 
-app.get("/", getIndex);
 app.get("/jobRoles", allowRoles([UserRole.Admin, UserRole.User]), getJobRoles);
 
 app.get("/login", getLoginForm);
 app.post("/login", postLoginForm);
 app.post("/logout", postLogout);
+app.get("/unauthorised", getUnauthorised);
 app.get("/register", getRegistrationForm);
 app.post("/register", postRegistrationForm);
+
+app.get("/", (req: express.Request, res: express.Response) => {
+  res.render('index.njk');
+});
+
+app.get("*", (req: express.Request, res: express.Response) => {
+  res.render("notFound.njk");
+});
