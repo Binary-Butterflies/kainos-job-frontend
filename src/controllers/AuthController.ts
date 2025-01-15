@@ -66,7 +66,7 @@ export const postRegistrationForm = async (
   controllerLogger.info("POST-ing registration form");
   try {
     await createUser(req.body);
-    res.redirect("/login");
+    res.redirect("/login?newAccount=true");
   } catch (e) {
     let errorMessage = "Failed to register"
 
