@@ -6,8 +6,6 @@ import { JobRoleDetailedResponse } from "../models/JobRoleDetailedResponse";
 
 const logService = getLogger("service");
 
-axios.defaults.baseURL = process.env.API_URL || 'http://localhost:8080/';
-
 export const URL: string = "/job-roles/";
 
 export const getAllJobRoles = async (token: string): Promise<JobRoleResponse[]> => {

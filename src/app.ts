@@ -14,10 +14,13 @@ import {
 } from "./controllers/AuthController";
 import { allowRoles } from "./middleware/AuthMiddleware";
 import { UserRole } from "./models/UserRole";
+import axios from "axios";
 
 dotenv.config();
 const appLogger = getLogger("app");
 const app = express();
+
+axios.defaults.baseURL = process.env.API_URL || 'http://localhost:8080/';
 
 declare module "express-session" {
   interface SessionData {
