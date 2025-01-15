@@ -15,10 +15,11 @@ export const getToken = async function (
       URL+"login",
       loginRequest
     );
+
     return response.data;
   } catch (e) {
     logService.error(() => e);
-    throw new Error("Failed to get employee");
+    throw new Error("Failed to login");
   }
 };
 
@@ -31,9 +32,10 @@ export const createUser = async function (
       URL+"register",
       registerRequest
     );
+
     return response.data;
   } catch (e) {
     logService.error(() => e);
-    throw new Error("Failed to create employee");
+    throw new Error("Failed to create user");
   }
 };
