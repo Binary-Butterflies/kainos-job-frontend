@@ -18,7 +18,7 @@ export const getToken = async function (
 
     return response.data;
   } catch (e) {
-    logService.error(() => JSON.stringify(e));
+    logService.error(() => e);
     throw new Error("Failed to login");
   }
 };
