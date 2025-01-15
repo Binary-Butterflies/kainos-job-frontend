@@ -5,7 +5,20 @@
   <br>
   <br>
   <form class="form" action = "/login" method="post">
-      <h1 class="mb-5">Log In</h1>
+      {% if requiresLogin %}
+        <h1 class="mb-3">Log In</h1>
+        <div class="alert alert-danger mb-4">
+          Please log in first to view this page.
+        </div>
+      {% elif errormessage %}
+        <h1 class="mb-3">Log In</h1>
+        <div class="alert alert-danger mb-4">
+          {{ errormessage }}
+        </div>
+      {% else %}
+        <h1 class="mb-5">Log In</h1>
+      {% endif %}
+
       <div class="mb-3">
         <label class="form-label fw-bold" id="input-group-left">Email:</label>
         <input type="text" class="form-control login-input" id="email" name="email" value="{{email}}" placeholder="Email">
@@ -14,12 +27,6 @@
         <label class="form-label fw-bold" id="input-group-left">Password:</label>
         <input type="password" class="form-control login-input" id="password" name="password" value="{{password}}" placeholder="Password">
       </div>
-
-      {% if errormessage %}
-      <div class="alert alert-danger" role="alert">
-        {{errormessage}}
-      </div>
-      {% endif %}
 
       <br>
       <div class="d-grid">

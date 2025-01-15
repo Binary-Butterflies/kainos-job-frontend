@@ -10,6 +10,7 @@ import {
   getLoginForm,
   getRegistrationForm,
   postLoginForm,
+  postLogout,
   postRegistrationForm,
 } from "./controllers/AuthController";
 import { allowRoles } from "./middleware/AuthMiddleware";
@@ -59,6 +60,11 @@ app.use(
   })
 );
 
+app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+  res.locals.isLoggedIn = req.session?.token != undefined;
+  next();
+})
+
 app.listen(3000, () => {
   appLogger.info("Server started on port 3000");
 });
@@ -70,5 +76,6 @@ app.get("/jobRoles", allowRoles([UserRole.Admin, UserRole.User]), getJobRoles);
 
 app.get("/login", getLoginForm);
 app.post("/login", postLoginForm);
+app.post("/logout", postLogout);
 app.get("/register", getRegistrationForm);
 app.post("/register", postRegistrationForm);

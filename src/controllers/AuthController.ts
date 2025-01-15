@@ -8,7 +8,7 @@ export const getLoginForm = async (
   res: express.Response
 ): Promise<void> => {
   controllerLogger.info("GET-ing login form");
-  res.render("loginForm.njk");
+  res.render("loginForm.njk", req.query);
 };
 
 export const postLoginForm = async (
@@ -18,12 +18,21 @@ export const postLoginForm = async (
   controllerLogger.info("POST-ing login form");
   try {
     req.session.token = await getToken(req.body);
-    res.redirect("/#");
+    res.redirect("/");
   } catch (e) {
     controllerLogger.error("Failed to login");
     res.locals.errormessage = "Failed to login"
-    res.render("loginForm.njk", req.body);
+    res.render("loginForm.njk", { ...req.query, ...req.body });
   }
+};
+
+export const postLogout = async (
+  req: express.Request,
+  res: express.Response
+): Promise<void> => {
+  controllerLogger.info("POST-ing logout");
+  req.session.token = null;
+  res.redirect("/");
 };
 
 export const getRegistrationForm = async (
