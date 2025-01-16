@@ -77,7 +77,7 @@ describe("JobRoleController", function () {
     });
 
     it("should render view with error message when error is thrown", async () => {
-      const errorMessage = "Error message";
+      const errorMessage = "Failed to get Job Roles";
 
       sinon.stub(JobRoleService, "getAllJobRoles").rejects(new Error(errorMessage));
 
