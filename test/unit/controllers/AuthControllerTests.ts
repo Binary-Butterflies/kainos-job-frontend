@@ -32,7 +32,7 @@ describe("AuthController", function () {
       const req = {};
       const res = {
         render: sinon.spy(),
-        locals: { errormessage: "Failed to login" },
+        locals: { errorMessage: "Failed to login" },
       };
 
       await AuthController.postLoginForm(
@@ -41,7 +41,7 @@ describe("AuthController", function () {
       );
 
       expect(res.render.calledOnce).to.be.true;
-      expect(res.locals.errormessage).to.equal(errorMessage);
+      expect(res.locals.errorMessage).to.equal(errorMessage);
     });
   });
 
@@ -63,7 +63,7 @@ describe("AuthController", function () {
       const req = {};
       const res = {
         render: sinon.spy(),
-        locals: { errormessage: "Failed to register" },
+        locals: { errorMessage: "Failed to register" },
       };
 
       await AuthController.postRegistrationForm(
@@ -72,7 +72,7 @@ describe("AuthController", function () {
       );
 
       expect(res.render.calledOnce).to.be.true;
-      expect(res.locals.errormessage).to.equal(errorMessage);
+      expect(res.locals.errorMessage).to.equal(errorMessage);
     });
   });
 });

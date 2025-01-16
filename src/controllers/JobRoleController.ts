@@ -10,9 +10,9 @@ export const getJobRoles = async (req: express.Request, res: express.Response): 
         logService.info(() => `getJobRoles`);
         res.render('jobroles-list.njk', { jobRoles: await getAllJobRoles(req.session.token) });
     } catch (e) {
-        res.locals.errormessage = 'Failed to get Job Roles';
+        res.locals.errorMessage = 'Failed to get Job Roles';
 
-        logService.error(() => res.locals.errormessage);
+        logService.error(() => res.locals.errorMessage);
         res.render('jobroles-list.njk');
     }
 };
@@ -85,11 +85,11 @@ export const postJobRoleApply = async (req: express.Request, res: express.Respon
 
 const handleJobRoleError = async (e: AxiosError, res: express.Response) => {
     if (e?.response?.status === 404) {
-        res.locals.errormessage = 'Job Role does not exist';
+        res.locals.errorMessage = 'Job Role does not exist';
     } else {
-        res.locals.errormessage = 'Failed to get Job Role';
+        res.locals.errorMessage = 'Failed to get Job Role';
     }
 
-    logService.error(() => res.locals.errormessage);
+    logService.error(() => res.locals.errorMessage);
     res.render('jobrole-error.njk');
 }

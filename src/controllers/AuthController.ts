@@ -37,7 +37,7 @@ export const postLoginForm = async (
     }
 
     controllerLogger.error(errorMessage);
-    res.locals.errormessage = errorMessage;
+    res.locals.errorMessage = errorMessage;
     res.render("loginForm.njk", { ...req.query, ...req.body });
   }
 };
@@ -81,7 +81,7 @@ export const postRegistrationForm = async (
     }
 
     controllerLogger.error(errorMessage);
-    res.locals.errormessage = errorMessage
+    res.locals.errorMessage = errorMessage
     res.render("registrationForm.njk", req.body);
   }
 };
