@@ -49,6 +49,9 @@
     {% else %}
       <button type="button" class="btn btn-primary fs-4 mt-5" disabled>Applications Closed</button>
     {% endif %}
+    {% if isAdmin %}
+      <a href="/jobrole/{{ role.jobRoleId }}/applicants" class="btn btn-success fs-4 mt-5 ms-3">View Applicants</a>
+    {% endif %}
     {% if role.details.sharepointURL %}
       <a href="{{ role.details.sharepointURL }}" class="btn btn-outline-primary fs-4 mt-5 ms-3">More Details</a>
     {% endif %}

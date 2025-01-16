@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import { getJobRole, getJobRoles, getJobRoleApply, postJobRoleApply, getJobRoleSuccess } from "./controllers/JobRoleController";
+import { getJobRole, getJobRoles, getJobRoleApply, postJobRoleApply, getJobRoleSuccess, getJobRoleApplicants } from "./controllers/JobRoleController";
 import express from "express";
 import nunjucks from "nunjucks";
 import bodyParser from "body-parser";
@@ -20,6 +20,8 @@ import { allowRoles } from "./middleware/AuthMiddleware";
 import { UserRole } from "./models/UserRole";
 import * as path from "path";
 import multer from "multer";
+import { jwtDecode } from "jwt-decode";
+import { JwtToken } from "./models/JwtToken";
 
 const appLogger = getLogger("app");
 const app = express();
@@ -65,6 +67,13 @@ app.use(
 
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
   res.locals.isLoggedIn = req.session?.token != undefined;
+  if (res.locals.isLoggedIn) {
+    try {
+      const decodedToken: JwtToken = jwtDecode(req.session.token);
+      res.locals.isAdmin = decodedToken.Role == UserRole.Admin;
+    } catch { /* empty */ }
+  }
+  
   next();
 })
 
@@ -90,6 +99,7 @@ app.get("/jobRoles", allowRoles([UserRole.Admin, UserRole.User]), getJobRoles);
 app.get('/jobRole/success', allowRoles([UserRole.Admin, UserRole.User]), getJobRoleSuccess);
 app.get('/jobRole/:id', allowRoles([UserRole.Admin, UserRole.User]), getJobRole);
 app.get('/jobRole/:id/apply', allowRoles([UserRole.Admin, UserRole.User]), getJobRoleApply);
+app.get('/jobRole/:id/applicants', allowRoles([UserRole.Admin]), getJobRoleApplicants);
 app.post('/jobRole/:id/apply', allowRoles([UserRole.Admin, UserRole.User]), uploadDoc.single('file'), postJobRoleApply);
 
 app.get("/login", getLoginForm);

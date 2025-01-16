@@ -40,7 +40,6 @@ export const getJobRoleSuccess = async (req: express.Request, res: express.Respo
 
 export const getJobRoleApply = async (req: express.Request, res: express.Response): Promise<void> => {
     try {
-        console.log("Made it to apply")
         logService.info(() => `getJobRoleApply: ${req.params.id}`);
         const role = await getSingleJobRole(req.params.id, req.session.token);
 
@@ -55,8 +54,26 @@ export const getJobRoleApply = async (req: express.Request, res: express.Respons
     }
 };
 
+export const getJobRoleApplicants = async (req: express.Request, res: express.Response): Promise<void> => {
+    try {
+        logService.info(() => `getJobRoleApplicants: ${req.params.id}`);
+        const role = await getSingleJobRole(req.params.id, req.session.token);
+        // const applicants = await getApplicants
+
+        if (role == null) {
+            throw new Error('Failed to get Job Role');
+        }
+
+        res.locals.role = role;
+        // res.locals.applicants = applicants;
+        res.render('jobrole-applicants.njk', req.query);
+    } catch (e) {
+        handleJobRoleError(e, res);
+    }
+};
+
 export const postJobRoleApply = async (req: express.Request, res: express.Response): Promise<void> => {
-    logService.error(() => `postJobRoleApply: ${req.params.id}`);
+    logService.info(() => `postJobRoleApply: ${req.params.id}`);
 
     if (req.file == undefined) {
         res.redirect(`/jobrole/${req.params.id}/apply?fileUploadFailed=true`);
