@@ -26,7 +26,7 @@ This project makes use of SASS for its styling. To use SASS, please execute the 
 npm run sass
 ```
 
-This will watch for changes made to the SASS stylesheets and automatically compile them to CSS
+This will watch for changes made to the SASS stylesheets and automatically compile them to CSS.
 
 ### Running
 
