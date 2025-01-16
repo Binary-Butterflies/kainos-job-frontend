@@ -82,7 +82,6 @@ app.listen(3000, () => {
   appLogger.info("Server started on port 3000");
 });
 
-// app.use("/", express.static("node_modules/bootstrap/dist"));
 
 const uploadDoc = multer({
   storage: multer.memoryStorage(),
