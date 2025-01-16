@@ -86,13 +86,13 @@ app.listen(3000, () => {
 
 const uploadDoc = multer({
   storage: multer.memoryStorage(),
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype == "application/pdf") { cb(null, true); }
-    if (file.mimetype == "application/msword") { cb(null, true); }
-    if (file.mimetype == "application/vnd.oasis.opendocument.text") { cb(null, true); }
-    if (file.mimetype == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") { cb(null, true); }
+  fileFilter: (req, file, callBack) => {
+    if (file.mimetype == "application/pdf") { callBack(null, true); }
+    if (file.mimetype == "application/msword") { callBack(null, true); }
+    if (file.mimetype == "application/vnd.oasis.opendocument.text") { callBack(null, true); }
+    if (file.mimetype == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") { callBack(null, true); }
 
-    cb(null, false);
+    callBack(null, false);
   }
 })
 
