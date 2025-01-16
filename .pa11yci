@@ -1,8 +1,11 @@
 {
     "urls": [
-        "http://localhost:3000/",
-        "http://localhost:3000/jobroles",
-        "http://localhost:3000/register",
-        "http://localhost:3000/login"
+        "https://i2xgsbdhaf.eu-west-1.awsapprunner.com/",
+        "https://i2xgsbdhaf.eu-west-1.awsapprunner.com/jobroles",
+        "https://i2xgsbdhaf.eu-west-1.awsapprunner.com/jobrole/1",
+        "https://i2xgsbdhaf.eu-west-1.awsapprunner.com/register",
+        "https://i2xgsbdhaf.eu-west-1.awsapprunner.com/login",
+        "https://i2xgsbdhaf.eu-west-1.awsapprunner.com/unauthorised",
+        "https://i2xgsbdhaf.eu-west-1.awsapprunner.com/404"
     ]
 }
