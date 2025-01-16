@@ -58,14 +58,12 @@ export const getJobRoleApplicants = async (req: express.Request, res: express.Re
     try {
         logService.info(() => `getJobRoleApplicants: ${req.params.id}`);
         const role = await getSingleJobRole(req.params.id, req.session.token);
-        // const applicants = await getApplicants
 
         if (role == null) {
             throw new Error('Failed to get Job Role');
         }
 
         res.locals.role = role;
-        // res.locals.applicants = applicants;
         res.render('jobrole-applicants.njk', req.query);
     } catch (e) {
         handleJobRoleError(e, res);

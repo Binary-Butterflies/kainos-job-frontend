@@ -84,7 +84,6 @@ app.listen(3000, () => {
   appLogger.info("Server started on port 3000");
 });
 
-// app.use("/", express.static("node_modules/bootstrap/dist"));
 
 const s3 = new S3Client({
 	region: process.env.AWS_REGION,
