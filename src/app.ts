@@ -45,6 +45,7 @@ const env = nunjucks.configure("views", {
 env.addFilter("date", dateFilter);
 
 app.use(express.static(path.join(__dirname + '/../resources')));
+app.use(express.static(path.join(__dirname + '/../node_modules/bootstrap/dist')));
 app.use(express.static("public"));
 app.set("view engine", "html");
 

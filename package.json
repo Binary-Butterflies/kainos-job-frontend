@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "start": "tsc && npx sass sass/:resources/stylesheets/ && mkdir -p ./dist/resources && cp -r ./resources/* ./dist/resources/ && node dist/src/app.js",
+    "start": "tsc && npx sass sass/:resources/stylesheets/ && mkdir -p ./dist/resources && cp -r ./resources/* ./dist/resources/ && cp -r ./node_modules/bootstrap/dist/* ./dist/resources && node dist/src/app.js",
     "dev": "nodemon src/app.ts",
     "linter": "npx eslint .",
     "test": "mocha -r ts-node/register 'test/**/*.ts'",

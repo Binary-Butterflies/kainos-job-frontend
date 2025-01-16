@@ -8,7 +8,7 @@ dropZone.addEventListener('dragover', (e) => {
     dropZone.classList.add('bg-light')
 })
 
-dropZone.addEventListener('dragleave', (e) => {
+dropZone.addEventListener('dragleave', () => {
     dropZone.classList.remove('bg-light')
 })
 

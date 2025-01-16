@@ -62,8 +62,8 @@
           <td>In Progress</td>
           <td>Fri Oct 23 2024</td>
           <td>
-            <a href="#" class="btn btn-success">Hire</a>
-            <a href="#" class="btn btn-danger">Reject</a>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#hireModal">Hire</button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal">Reject</button>
             <a href="#" class="btn btn-primary">View CV</a>
           </td>
         </tr>
@@ -94,5 +94,45 @@
   </div>
 </div>
 
-<script src="/scripts/file-upload.js"></script>
+<div class="modal fade" id="hireModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hireModalLabel" aria-hidden="true">
+  <form class="form" action = "/?hire=true" method="post">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="hireModalLabel">Hire Candidate?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to hire <b>test@email.com?</b></p>
+          <p><b>This action cannot be undone!</b></p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" href="#" class="btn btn-danger">Yes, Hire Candidate</a>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No, Go Back</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" id="rejectModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+  <form class="form" action = "/?hire=false" method="post">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="rejectModalLabel">Reject Candidate?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to reject <b>test@email.com?</b></p>
+          <p><b>This action cannot be undone!</b></p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" href="#" class="btn btn-danger">Yes, Reject Candidate</a>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No, Go Back</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 {% endblock %}
