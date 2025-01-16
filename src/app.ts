@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import { getJobRole, getJobRoles } from "./controllers/JobRoleController";
+import { getJobRole, getJobRoles, getJobRoleApply, postJobRoleApply, getJobRoleSuccess } from "./controllers/JobRoleController";
 import express from "express";
 import nunjucks from "nunjucks";
 import bodyParser from "body-parser";
@@ -19,6 +19,7 @@ import {
 import { allowRoles } from "./middleware/AuthMiddleware";
 import { UserRole } from "./models/UserRole";
 import * as path from "path";
+import multer from "multer";
 
 const appLogger = getLogger("app");
 const app = express();
@@ -73,8 +74,23 @@ app.listen(3000, () => {
 
 // app.use("/", express.static("node_modules/bootstrap/dist"));
 
+const uploadDoc = multer({
+  storage: multer.memoryStorage(),
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype == "application/pdf") { cb(null, true); }
+    if (file.mimetype == "application/msword") { cb(null, true); }
+    if (file.mimetype == "application/vnd.oasis.opendocument.text") { cb(null, true); }
+    if (file.mimetype == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") { cb(null, true); }
+
+    cb(null, false);
+  }
+})
+
 app.get("/jobRoles", allowRoles([UserRole.Admin, UserRole.User]), getJobRoles);
+app.get('/jobRole/success', allowRoles([UserRole.Admin, UserRole.User]), getJobRoleSuccess);
 app.get('/jobRole/:id', allowRoles([UserRole.Admin, UserRole.User]), getJobRole);
+app.get('/jobRole/:id/apply', allowRoles([UserRole.Admin, UserRole.User]), getJobRoleApply);
+app.post('/jobRole/:id/apply', allowRoles([UserRole.Admin, UserRole.User]), uploadDoc.single('file'), postJobRoleApply);
 
 app.get("/login", getLoginForm);
 app.post("/login", postLoginForm);

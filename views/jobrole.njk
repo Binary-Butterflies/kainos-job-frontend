@@ -45,7 +45,7 @@
     </ul>
 
     {% if role.details.statusName == "Open" %}
-      <a href="#" class="btn btn-primary fs-4 mt-5">Apply Now</a>
+      <a href="/jobrole/{{ role.jobRoleId }}/apply/" class="btn btn-primary fs-4 mt-5">Apply Now</a>
     {% else %}
       <button type="button" class="btn btn-primary fs-4 mt-5" disabled>Applications Closed</button>
     {% endif %}

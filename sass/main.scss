@@ -50,8 +50,16 @@ html, body {
   font-size: 6vw;
 }
 
+.mid-heading {
+  font-size: 3vw;
+}
+
 .big-subheading {
   font-size: 2vw;
+}
+
+.mid-subheading {
+  font-size: 1.5vw;
 }
 
 .job-title {
@@ -113,4 +121,13 @@ html, body {
 
 .login-container {
   width: 500px;
+}
+
+.file-upload {
+  border-width: 3px;
+  font-size: 1.5em;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-top: 4em;
+  padding-bottom: 4em;
 }

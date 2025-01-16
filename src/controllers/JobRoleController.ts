@@ -1,6 +1,7 @@
 import express from "express";
 import { getAllJobRoles, getSingleJobRole, } from "../services/JobRoleServices";
 import { getLogger } from "../LogConfig";
+import { AxiosError } from "axios";
 
 const logService = getLogger("service");
 
@@ -25,15 +26,53 @@ export const getJobRole = async (req: express.Request, res: express.Response): P
             throw new Error('Failed to get Job Role');
         }
 
-        res.render('jobrole.njk', { role: role });
+        res.locals.role = role;
+        res.render('jobrole.njk');
     } catch (e) {
-        if (e?.response?.status === 404) {
-            res.locals.errormessage = 'Job Role does not exist';
-        } else {
-            res.locals.errormessage = 'Failed to get Job Role';
-        }
-
-        logService.error(() => res.locals.errormessage);
-        res.render('jobrole-error.njk');
+        handleJobRoleError(e, res);
     }
 };
+
+export const getJobRoleSuccess = async (req: express.Request, res: express.Response): Promise<void> => {
+    logService.info(() => `getJobRoleSuccess`);
+    res.render('jobrole-apply-success.njk');
+};
+
+export const getJobRoleApply = async (req: express.Request, res: express.Response): Promise<void> => {
+    try {
+        console.log("Made it to apply")
+        logService.info(() => `getJobRoleApply: ${req.params.id}`);
+        const role = await getSingleJobRole(req.params.id, req.session.token);
+
+        if (role == null) {
+            throw new Error('Failed to get Job Role');
+        }
+
+        res.locals.role = role;
+        res.render('jobrole-apply.njk', req.query);
+    } catch (e) {
+        handleJobRoleError(e, res);
+    }
+};
+
+export const postJobRoleApply = async (req: express.Request, res: express.Response): Promise<void> => {
+    logService.error(() => `postJobRoleApply: ${req.params.id}`);
+
+    if (req.file == undefined) {
+        res.redirect(`/jobrole/${req.params.id}/apply?fileUploadFailed=true`);
+        return;
+    }
+
+    res.redirect(`/jobrole/success`);
+};
+
+const handleJobRoleError = async (e: AxiosError, res: express.Response) => {
+    if (e?.response?.status === 404) {
+        res.locals.errormessage = 'Job Role does not exist';
+    } else {
+        res.locals.errormessage = 'Failed to get Job Role';
+    }
+
+    logService.error(() => res.locals.errormessage);
+    res.render('jobrole-error.njk');
+}
