@@ -20,6 +20,8 @@ import { allowRoles } from "./middleware/AuthMiddleware";
 import { UserRole } from "./models/UserRole";
 import * as path from "path";
 import multer from "multer";
+import multerS3 from "multer-s3";
+import { S3Client } from "@aws-sdk/client-s3";
 import { jwtDecode } from "jwt-decode";
 import { JwtToken } from "./models/JwtToken";
 
@@ -84,8 +86,25 @@ app.listen(3000, () => {
 
 // app.use("/", express.static("node_modules/bootstrap/dist"));
 
+const s3 = new S3Client({
+	region: process.env.AWS_REGION,
+	credentials: {
+		accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+		secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+	},
+});
+
 const uploadDoc = multer({
-  storage: multer.memoryStorage(),
+  storage: multerS3({
+    s3: s3,
+    bucket: process.env.AWS_BUCKET_NAME,
+    metadata: function (req, file, callBack) {
+      callBack(null, { fieldName: file.fieldname });
+    },
+    key: function (req, file, callBack) {
+      callBack(null, path.basename(`${Date.now()}-${file.originalname}`))
+    }
+  }),
   fileFilter: (req, file, callBack) => {
     if (file.mimetype == "application/pdf") { callBack(null, true); }
     if (file.mimetype == "application/msword") { callBack(null, true); }
