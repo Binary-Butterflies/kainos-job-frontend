@@ -19,6 +19,15 @@ npm i
 
 To run the application, please create a `.env` file in the root of the project based on the `.env.template` file.
 
+### SASS
+
+This project makes use of SASS for its styling. To use SASS, please execute the following in a seperate terminal:
+```bash
+npm run sass
+```
+
+This will watch for changes made to the SASS stylesheets and automatically compile them to CSS.
+
 ### Running
 
 To run the application in live mode, please execute:

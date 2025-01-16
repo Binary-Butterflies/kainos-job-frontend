@@ -1,0 +1,132 @@
+$kainos-colors: (
+  "kainos-blue": #283583,
+  "kainos-green": #61a83f,
+  "kainos-mid-blue": #41679f,
+  "kainos-dark-green": #004631,
+  "kainos-grey": #575756,
+  "kainos-orange": #ec6608,
+  "kainos-bright-green": #cfd600,
+  "kainos-bright-blue": #009fe3,
+);
+
+$theme-colors-overrides: (
+  "primary": map-get($map: $kainos-colors, $key: "kainos-blue"),
+  "secondary": map-get($map: $kainos-colors, $key: "kainos-grey"),
+  "success": map-get($map: $kainos-colors, $key: "kainos-green"),
+  "warning": map-get($map: $kainos-colors, $key: "kainos-orange"),
+  "info": map-get($map: $kainos-colors, $key: "kainos-bright-blue")
+);
+
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+$theme-colors: map-merge($theme-colors, $theme-colors-overrides);
+$theme-colors: map-merge($theme-colors, $kainos-colors);
+
+$btn-border-width: 3px;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.bg-kainos-gradient {
+  background-image: linear-gradient(to right,
+    map-get($map: $kainos-colors, $key: "kainos-green"),
+    map-get($map: $kainos-colors, $key: "kainos-mid-blue")
+  );
+}
+
+.login-input {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.big-heading {
+  font-size: 6vw;
+}
+
+.mid-heading {
+  font-size: 3vw;
+}
+
+.big-subheading {
+  font-size: 2vw;
+}
+
+.mid-subheading {
+  font-size: 1.5vw;
+}
+
+.job-title {
+  font-size: 4em;
+}
+
+.job-header {
+  text-decoration: underline;
+  font-weight: 600;
+  font-size: 2em;
+}
+
+.job-detail-text {
+  font-size: 1.5em;
+}
+
+.job-detail-title {
+  @extend .job-detail-text;
+  font-weight: bold;
+}
+
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/hero.webp");
+  background-position: top;
+  background-size: cover;
+  height: 600px;
+  left: 0;
+  -o-object-fit: cover;
+  object-fit: cover;
+  overflow: hidden;
+  pointer-events: none;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  color: white;
+  background-color: map-get($map: $kainos-colors, $key: "kainos-blue");
+  padding-left: 4em;
+  padding-right: 4em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  pointer-events: all;
+}
+
+.hero-content h1 {
+  font-size: 4em;
+}
+
+.hero-content p {
+  font-size: 1.5em;
+}
+
+.login-container {
+  width: 500px;
+}
+
+.file-upload {
+  border-width: 3px !important;
+  font-size: 1.5em;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-top: 4em;
+  padding-bottom: 4em;
+}

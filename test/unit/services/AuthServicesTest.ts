@@ -44,7 +44,7 @@ describe("AuthService", function () {
       mock.onPost(URL+"login", loginRequest).reply(500);
 
       await getToken(loginRequest).catch((e) => {
-        expect(e.message).to.equal("Failed to login");
+        expect(e.message).to.equal("Request failed with status code 500");
       });
     });
   });
@@ -52,7 +52,7 @@ describe("AuthService", function () {
     it("should throw exception when 500 returned by axios", async () => {
       mock.onPost(URL+"register", badRegisterRequest).reply(500);
       await createUser(badRegisterRequest).catch((e) => {
-        expect(e.message).to.equal("Failed to create user");
+        expect(e.message).to.equal("Request failed with status code 500");
       });
     });
   });

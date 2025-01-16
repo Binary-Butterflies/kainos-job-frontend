@@ -56,7 +56,7 @@ describe("JobRoleController", function () {
       sinon.stub(JobRoleService, "getAllJobRoles").resolves(jobRoleList);
 
       const req = {};
-      const res = { render: sinon.spy(), locals: { errormessage: "" } };
+      const res = { render: sinon.spy(), locals: { errorMessage: "" } };
 
       await JobRoleController.getJobRoles(req as Request, res as unknown as Response);
 
@@ -69,7 +69,7 @@ describe("JobRoleController", function () {
       sinon.stub(JobRoleService, "getAllJobRoles").resolves(jobRoleList);
 
       const req = {};
-      const res = { render: sinon.spy(), locals: { errormessage: "" } };
+      const res = { render: sinon.spy(), locals: { errorMessage: "" } };
 
       await JobRoleController.getJobRoles(req as Request, res as unknown as Response);
 
@@ -77,17 +77,17 @@ describe("JobRoleController", function () {
     });
 
     it("should render view with error message when error is thrown", async () => {
-      const errorMessage = "Error message";
+      const errorMessage = "Failed to get Job Roles";
 
       sinon.stub(JobRoleService, "getAllJobRoles").rejects(new Error(errorMessage));
 
       const req = { session: { token: 'test' } };
-      const res = { render: sinon.spy(), locals: { errormessage: errorMessage } };
+      const res = { render: sinon.spy(), locals: { errorMessage: errorMessage } };
 
       await JobRoleController.getJobRoles(req as unknown as Request, res as unknown as Response);
 
       expect(res.render.calledOnce).to.be.true;
-      expect(res.locals.errormessage).to.equal(errorMessage);
+      expect(res.locals.errorMessage).to.equal(errorMessage);
     });
   });
 
@@ -98,21 +98,9 @@ describe("JobRoleController", function () {
       sinon.stub(JobRoleService, "getSingleJobRole").resolves(jobRole);
 
       const req = { params: { id: "1" } };
-      const res = { render: sinon.spy(), locals: { errormessage: "" } };
+      const res = { render: sinon.spy(), locals: { errorMessage: "" } };
 
       await JobRoleController.getJobRole(req as unknown as Request, res as unknown as Response);
-
-      expect(res.render.calledOnce).to.be.true;
-    });
-  });
-    
-
-  describe("getIndex", function () {
-    it("should render job role home view", async () => {
-      const req = {};
-      const res = { render: sinon.spy(), locals: { errormessage: "" } };
-
-      await JobRoleController.getIndex(req as Request, res as unknown as Response);
 
       expect(res.render.calledOnce).to.be.true;
     });

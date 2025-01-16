@@ -1,0 +1,138 @@
+{% extends "include/basePage.njk" %}
+
+{% block content %}
+<div class="flex-grow-1 w-100 p-5 mx-auto bg-kainos-blue">
+  <br><br>
+  <h1 class="text-center mb-4 job-title text-light">Applicants For {{ role.roleName }} Role</h1>
+  <br><br>
+</div>
+<div class="container w-75 pb-5 ps-5 pe-5 mx-auto">
+  <br><br>
+  <h1 class="text-center mb-4">Role Details</h1>
+
+  <div class="table-responsive card rounded-3 p-0 m-0 fs-5">
+    <table class="table table-bordered table-striped job-role-table rounded-3 border overflow-hidden p-0 m-0">
+      <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Capability</th>
+          <th>Band</th>
+          <th>Positions Remaning</th>
+          <th>Closing Date</th>
+          <th>Status</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <a href="/jobrole/{{ role.jobRoleId }}">{{ role.roleName }}</a>
+          </td>
+          <td>{{ role.capability.capabilityName }}</td>
+          <td>{{ role.band.bandName }}</td>
+          <td>{{ role.details.numberOfOpenPositions }}</td>
+          <td>{{ role.closingDate | date }}</td>
+          <td>{{ role.details.statusName }}</td>
+          <td>
+            <a href="{{ role.details.sharepointURL }}" class="btn btn-primary">SharePoint</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br><br>
+  <h1 class="text-center mb-4">Applications</h1>
+
+  <div class="table-responsive card rounded-3 p-0 m-0 fs-5">
+    <table class="table table-bordered table-striped job-role-table rounded-3 border overflow-hidden p-0 m-0">
+      <thead class="thead-dark">
+        <tr>
+          <th>Applicant</th>
+          <th>Status</th>
+          <th>Date Submitted</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <a href="#">test@email.com</a>
+          </td>
+          <td>In Progress</td>
+          <td>Fri Oct 23 2024</td>
+          <td>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#hireModal">Hire</button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal">Reject</button>
+            <a href="#" class="btn btn-primary">View CV</a>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <a href="#">test2@email.com</a>
+          </td>
+          <td>Hired</td>
+          <td>Fri Oct 23 2024</td>
+          <td>
+            <a href="#" class="btn btn-primary">View CV</a>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <a href="#">test3@email.com</a>
+          </td>
+          <td>Rejected</td>
+          <td>Fri Oct 23 2024</td>
+          <td>
+            <a href="#" class="btn btn-primary">View CV</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal fade" id="hireModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hireModalLabel" aria-hidden="true">
+  <form class="form" action = "/?hire=true" method="post">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="hireModalLabel">Hire Candidate?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to hire <b>test@email.com?</b></p>
+          <p><b>This action cannot be undone!</b></p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" href="#" class="btn btn-outline-primary">Yes, Hire Candidate</a>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No, Go Back</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" id="rejectModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+  <form class="form" action = "/?hire=false" method="post">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="rejectModalLabel">Reject Candidate?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to reject <b>test@email.com?</b></p>
+          <p><b>This action cannot be undone!</b></p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" href="#" class="btn btn-danger">Yes, Reject Candidate</a>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No, Go Back</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -8,7 +8,15 @@ export const getLoginForm = async (
   res: express.Response
 ): Promise<void> => {
   controllerLogger.info("GET-ing login form");
-  res.render("loginForm.html");
+  res.render("loginForm.njk", req.query);
+};
+
+export const getUnauthorised = async (
+  req: express.Request,
+  res: express.Response
+): Promise<void> => {
+  controllerLogger.info("GET-ing unauthorised page");
+  res.render("unauthorised.njk");
 };
 
 export const postLoginForm = async (
@@ -18,12 +26,29 @@ export const postLoginForm = async (
   controllerLogger.info("POST-ing login form");
   try {
     req.session.token = await getToken(req.body);
-    res.redirect("/#");
+    res.redirect("/");
   } catch (e) {
-    controllerLogger.error("Failed to login");
-    res.locals.errormessage = "Failed to login"
-    res.render("loginForm.html", req.body);
+    let errorMessage = "Failed to login"
+
+    if (e?.response?.status === 400) {
+      if (e.response.data == "User is not valid: Invalid Credentials") {
+        errorMessage = "Incorrect Email or Password";
+      }
+    }
+
+    controllerLogger.error(errorMessage);
+    res.locals.errorMessage = errorMessage;
+    res.render("loginForm.njk", { ...req.query, ...req.body });
   }
+};
+
+export const postLogout = async (
+  req: express.Request,
+  res: express.Response
+): Promise<void> => {
+  controllerLogger.info("POST-ing logout");
+  req.session.token = null;
+  res.redirect("/");
 };
 
 export const getRegistrationForm = async (
@@ -31,7 +56,7 @@ export const getRegistrationForm = async (
   res: express.Response
 ): Promise<void> => {
   controllerLogger.info("GET-ing registration form");
-  res.render("registrationForm.html");
+  res.render("registrationForm.njk");
 };
 
 export const postRegistrationForm = async (
@@ -41,10 +66,22 @@ export const postRegistrationForm = async (
   controllerLogger.info("POST-ing registration form");
   try {
     await createUser(req.body);
-    res.redirect("/login");
+    res.redirect("/login?newAccount=true");
   } catch (e) {
-    controllerLogger.error("Failed to register");
-    res.locals.errormessage = "Failed to register"
-    res.render("registrationForm.html", req.body);
+    let errorMessage = "Failed to register"
+
+    if (e?.response?.status === 400) {
+      if (e.response.data.startsWith("User is not valid: Invalid email")) {
+        errorMessage = "Please enter a valid Email";
+      } else if (e.response.data == "User is not valid: Password cannot be blank") {
+        errorMessage = "Please enter a password";
+      } else if (e.response.data == "User is not valid: User already exists") {
+        errorMessage = "Email already in use";
+      }
+    }
+
+    controllerLogger.error(errorMessage);
+    res.locals.errorMessage = errorMessage
+    res.render("registrationForm.njk", req.body);
   }
 };

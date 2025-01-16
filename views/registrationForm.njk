@@ -1,0 +1,42 @@
+{% extends "include/basePage.njk" %}
+
+{% block content %}
+<div class="flex-grow-1 container login-container p-5 mx-auto">
+  <br>
+  <br>
+  <form class="form" action = "/register" method="post">
+      {% if errorMessage %}
+        <h1 class="mb-3">Sign Up</h1>
+        <div class="alert alert-danger mb-4">
+          {{ errorMessage }}
+        </div>
+      {% else %}
+        <h1 class="mb-5">Sign Up</h1>
+      {% endif %}
+
+      <div class="mb-3">
+        <label class="form-label fw-bold" id="input-group-left">Email:</label>
+        <input type="text" class="form-control login-input" id="email" name="email" value="{{email}}" placeholder="Email">
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-bold" id="input-group-left">Password:</label>
+        <input type="password" class="form-control login-input" id="password" name="password" value="{{password}}" placeholder="Password">
+      </div>
+
+      <br>
+      <div class="d-grid">
+        <button id="submit" type="submit" class="btn btn-primary">Sign Up</button>
+      </div>
+      <br>
+
+      <hr>
+
+      <p class="text-center text-secondary mb-2">Already have an account?</p>
+      <div class="d-grid">
+        <a class="btn btn-outline-primary" href="/login">Log In</a>
+      </div>
+  </form>
+  <br>
+  <br>
+</div>
+{% endblock %}

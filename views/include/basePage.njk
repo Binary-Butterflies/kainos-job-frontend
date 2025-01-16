@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include "include/headBase.njk" %}
+    {% block title %}
+    <title>Kainos Jobs</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div class="d-flex flex-column h-100">
+      {% include "include/header.njk" %}
+    
+      {% block content %}
+      {% endblock %}
+
+      {% include "include/footer.njk" %}
+    </div>
+  </body>
+</html>

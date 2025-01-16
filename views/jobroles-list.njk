@@ -1,0 +1,48 @@
+{% extends "include/basePage.njk" %}
+
+{% block content %}
+<div class="flex-grow-1 container w-50 mx-auto p-5 mx-auto">
+  <br>
+  <br>
+  <h1 class="text-center mb-4">Open Job Roles at Kainos</h1>
+  <br>
+  <br>
+
+  {% if errorMessage %}
+    <div class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  {% endif %}
+
+  {% if jobRoles %}
+    <div class="row row-cols-2 gy-4">
+      {% for role in jobRoles | sort %}
+        <div class="col-md-6">
+          <div class="card w-100" style="width: 18rem;">
+            <div class="card-header text-center">
+              <h4 class="card-title">{{ role.roleName }}</h5>
+              <h5 class="card-subtitle mb-2 text-body-secondary">{{ role.capability.capabilityName }}</h6>
+            </div>
+            <div class="card-body">
+              <p class="card-text mb-1"><b>Location:</b> {{ role.location }}</p>
+              <p class="card-text mb-1"><b>Band:</b> {{ role.band.bandName }}</p>
+              <p class="card-text mb-1"><b>Closing Date:</b> {{ role.closingDate | date }}</p>
+            </div>
+            <div class="card-footer text-center">
+              <a href="/jobrole/{{ role.jobRoleId }}" class="btn btn-primary">Apply Now</a>
+
+              {% if isAdmin %}
+              <a href="/jobrole/{{ role.jobRoleId }}/applicants" class="btn btn-success">View Applicants</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center big-subheading">No job roles available at the moment.</p>
+  {% endif %}
+  <br>
+  <br>
+</div>
+{% endblock %}

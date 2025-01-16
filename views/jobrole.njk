@@ -1,0 +1,59 @@
+{% extends "include/basePage.njk" %}
+
+{% block content %}
+  <div class="flex-grow-1 w-100 p-5 mx-auto bg-kainos-blue">
+    <br><br>
+    <h1 class="text-center mb-4 job-title text-light">{{ role.roleName }}</h1>
+    <br><br>
+  </div>
+  <div class="container w-50 pb-5 ps-5 pe-5 mx-auto">
+    <br>
+
+    <p class="job-header mt-5">Job Description</p>
+    <p>{{ role.details.description }}</p>
+
+    <p class="job-header mt-5">Responsibilities</p>
+    <p>{{ role.details.responsibilities }}</p>
+
+    <p class="job-header mt-5">Job Details</p>
+
+    <ul>
+      <li>
+        <span class="job-detail-title mt-5">Location:</span>
+        <span class="job-detail-text">{{ role.location }}</span>
+      </li>
+      <li>
+        <span class="job-detail-title mt-5">Capability:</span>
+        <span class="job-detail-text">{{ role.capability.capabilityName }}</span>
+      </li>
+      <li>
+        <span class="job-detail-title mt-5">Band:</span>
+        <span class="job-detail-text">{{ role.band.bandName }}</span>
+      </li>
+      <li>
+        <span class="job-detail-title mt-5">Open Positions:</span>
+        <span class="job-detail-text">{{ role.details.numberOfOpenPositions }}</span>
+      </li>
+      <li>
+        <span class="job-detail-title mt-5">Closing Date:</span>
+        <span class="job-detail-text">{{ role.closingDate | date }}</span>
+      </li>
+      <li>
+        <span class="job-detail-title mt-5">Listing Status:</span>
+        <span class="job-detail-text">{{ role.details.statusName }}</span>
+      </li>
+    </ul>
+
+    {% if role.details.statusId == 1 %}
+      <a href="/jobrole/{{ role.jobRoleId }}/apply/" class="btn btn-primary fs-4 mt-5">Apply Now</a>
+    {% else %}
+      <button type="button" class="btn btn-primary fs-4 mt-5" disabled>Applications Closed</button>
+    {% endif %}
+    {% if isAdmin %}
+      <a href="/jobrole/{{ role.jobRoleId }}/applicants" class="btn btn-success fs-4 mt-5 ms-3">View Applicants</a>
+    {% endif %}
+    {% if role.details.sharepointURL %}
+      <a href="{{ role.details.sharepointURL }}" class="btn btn-outline-primary fs-4 mt-5 ms-3">More Details</a>
+    {% endif %}
+  </div>
+{% endblock %}

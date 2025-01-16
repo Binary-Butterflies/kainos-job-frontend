@@ -1,0 +1,37 @@
+{% extends "include/basePage.njk" %}
+
+{% block content %}
+<div class="flex-grow-1 w-100 pb-5 mx-auto hero">
+  <div class="hero-image">
+    <div class="hero-content">
+      <h1>Kainos Jobs</h1>
+      <p>Our people write our story</p>
+      <a class="btn btn-success fs-4 mt-3" href="{{ '/jobroles' if isLoggedIn else '/login' }}">Apply Now</a>
+    </div>
+  </div>
+</div>
+<div class="container w-50">
+  <h1>Start your journey with Kainos today</h1>
+  <p>At Kainos, our people are at the heart of everything. From driving our ambition, to fostering a unique culture, and using technology to make the world a better place - they are responsible for everything we continue to achieve.</p>
+  <p>In return, we give them all they need to unleash their creativity, reach their full potential and be part of a nurturing environment where they can be themselves and be their best.</p>
+  <p>Here, your ideas aren't optional. They're expected. Your voice isn't just heard. It's amplified. And your potential isn't just pie in the sky. It's just waiting to be written, read and realised. Each of us has a role in shaping the next extraordinary chapter of the Kainos story.</p>
+
+  <br>
+
+  <h1>What part might you play?</h1>
+  <p>For nearly 40 years now, we've understood our people's needs, aspirations and motivations. Their ambitions to push the boundaries of what's possible, their desires to do the best work they can, and their need to leave a legacy that we can be proud of.</p>
+  <p>This is a story you will want to be part of...</p>
+
+  <br>
+
+  <h1>Long story short</h1>
+  <p>Since 1986, we've been embracing the digital transformation challenges that others shy away from.</p>
+  <p>But we measure our success not by commercial results or claims of being the best. Our shared vision is simple, using technology to make people's lives easier and make the world a little better day by day.</p>
+  <p>We mastered our craft as software engineers on ground-breaking technology projects and quickly began developing our own ideas. Through the years we have innovated and broadened our capabilities.</p>
+
+  <br>
+
+  <p>Today you'll find us transforming how genomics will inform the future of healthcare, streamlining back office functions for big names all over the world, and transforming how entire countries administer everyday tasks to millions of citizens.
+  <p>We look for talented people who are good at solving problems and want to change the world through technology. If this sounds like you, you've come to the right place.
+</div>
+{% endblock %}
